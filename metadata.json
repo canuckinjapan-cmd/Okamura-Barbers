@@ -1,0 +1,6 @@
+{
+  "name": "オシャレヘアーオカムラ (Okamura Barbers)",
+  "description": "The first official official website for Okamura Barbers, a premium traditional Japanese barber shop in Buzen City, Fukuoka Prefecture, Japan. Established in 1950, combining three generations of craftsmanship with modern barber styles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
