@@ -26,6 +26,22 @@ import StorySection from './components/StorySection';
 import CouponSection from './components/CouponSection';
 import AccessSection from './components/AccessSection';
 
+// Image Imports (Vite handles base path automatically for imported assets)
+import modelFadeImg from './assets/images/model_fade_1783583114507.jpg';
+import kidsCutImg from './assets/images/kids_student_haircut_1783608030948.jpg';
+import modelPermImg from './assets/images/model_perm_1783583125432.jpg';
+import vintageToolsImg from './assets/images/vintage_tools_1783583095952.jpg';
+import vintageStorefrontImg from './assets/images/vintage_storefront_1950s_1784452556901.jpg';
+import okamuraExteriorImg from './assets/images/Okamura-exterior.jpg';
+import okamuraInteriorImg from './assets/images/Okamura-interior.jpg';
+import heroBarberCutImg from './assets/images/hero_barber_cut_1783583051614-new01.jpg';
+import okamuraLogoImg from './assets/images/Okamura-logo02.svg';
+import okamura10Img from './assets/images/Okamura-10.jpg';
+import okamuraInsta01Img from './assets/images/Okamura-Insta01.jpg';
+import okamuraInsta02Img from './assets/images/Okamura-Insta02.jpg';
+import okamuraInsta03Img from './assets/images/Okamura-Insta03.jpg';
+import okamuraInsta04Img from './assets/images/Okamura-Insta04.jpg';
+
 // Static Data Definitions
 const SERVICES: Service[] = [
   {
@@ -35,7 +51,7 @@ const SERVICES: Service[] = [
     price: 3660,
     duration: 45,
     description: '三世代にわたり磨かれた岡村伝統のカット。シャンプー、丁寧なブロー、襟剃り、さらには心地よい眉カットまでがすべて含まれた基本コースです。',
-    image: '/src/assets/images/model_fade_1783583114507.jpg',
+    image: modelFadeImg,
     isPopular: true,
   },
   {
@@ -45,7 +61,7 @@ const SERVICES: Service[] = [
     price: 2500,
     duration: 30,
     description: '幼児から高校生までを対象としたカット。動いてしまう小さなお子様でも優しくあやしながらスピーディに仕上げ、校則に合わせた爽やかな髪型を提供します。',
-    image: '/src/assets/images/kids_student_haircut_1783608030948.jpg',
+    image: kidsCutImg,
   },
   {
     id: 'fade',
@@ -54,7 +70,7 @@ const SERVICES: Service[] = [
     price: 4500,
     duration: 50,
     description: 'ミリ単位で色彩を調整する高難度フェードスタイル。伝統的なカミソリによる輪郭調整と、現代のバーバースタイルの融合をご体感ください。',
-    image: '/src/assets/images/model_perm_1783583125432.jpg',
+    image: modelPermImg,
   },
   {
     id: 'beard',
@@ -73,21 +89,21 @@ const TIMELINE_EVENTS: TimelineEvent[] = [
     title: '初代・岡村一郎が豊前市千束に「岡村理容店」を創業',
     description: '昭和25年、豊前市で最初の第一歩を踏み出しました。当時としては珍しい最先端のカットハサミを導入し、街で親しまれる理容店として愛され始めました。',
     badge: '創業 (1950)',
-    image: '/src/assets/images/vintage_tools_1783583095952.jpg',
+    image: vintageToolsImg,
   },
   {
     year: 1965,
     title: '理容椅子増台と、伝統の「和式シェービング」の確立',
     description: '宇島港や工場で働く方々のためにサービスを拡大。肌にやさしい深剃り「マイルド直刃剃り」と自家製石鹸ラザーがこの頃誕生しました。',
     badge: '発展期',
-    image: '/src/assets/images/vintage_storefront_1950s_1784452556901.jpg',
+    image: vintageStorefrontImg,
   },
   {
     year: 1985,
     title: '二代目・岡村二郎が継承。モダンバーバー要素の追加',
     description: '初代の技を受け継いだ二代目が就任。伝統を守りつつ流行スタイルやパーマ、カラーを取り入れ、幅広い世代が通える店へと進化しました。',
     badge: '二代目継承',
-    image: '/src/assets/images/Okamura-exterior.jpg',
+    image: okamuraExteriorImg,
   },
   {
     year: 2025,
@@ -149,12 +165,12 @@ const FAQS: FaqItem[] = [
 ];
 
 const INSTAGRAM_POSTS = [
-  { url: '/src/assets/images/Okamura-interior.jpg', caption: '#OkamuraInterior #BarberShop' },
-  { url: '/src/assets/images/Okamura-10.jpg', caption: '#OkamuraBarber #Craftsmanship' },
-  { url: '/src/assets/images/Okamura-Insta01.jpg', caption: '#OkamuraStyle #BarberLife' },
-  { url: '/src/assets/images/Okamura-Insta02.jpg', caption: '#ClassicCut #Grooming' },
-  { url: '/src/assets/images/Okamura-Insta03.jpg', caption: '#TraditionalBarber #Buzen' },
-  { url: '/src/assets/images/Okamura-Insta04.jpg', caption: '#OkamuraBarbers #FreshStyle' },
+  { url: okamuraInteriorImg, caption: '#OkamuraInterior #BarberShop' },
+  { url: okamura10Img, caption: '#OkamuraBarber #Craftsmanship' },
+  { url: okamuraInsta01Img, caption: '#OkamuraStyle #BarberLife' },
+  { url: okamuraInsta02Img, caption: '#ClassicCut #Grooming' },
+  { url: okamuraInsta03Img, caption: '#TraditionalBarber #Buzen' },
+  { url: okamuraInsta04Img, caption: '#OkamuraBarbers #FreshStyle' },
 ];
 
 export default function App() {
@@ -210,7 +226,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-gold-400"
               >
                 <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                <span>Since 1950 — Buzen, Fukuoka</span>
+                <span>Since 1950 — Buzen, Fukuoka - TEST</span>
               </motion.div>
 
               <motion.h1
@@ -302,7 +318,7 @@ export default function App() {
                 className="relative aspect-3/4 md:aspect-4/5 lg:aspect-3/4 overflow-hidden rounded-2xl border border-neutral-800/80 shadow-2xl bg-neutral-900"
               >
                 <img
-                  src="/src/assets/images/hero_barber_cut_1783583051614-new01.jpg"
+                  src={heroBarberCutImg}
                   alt="Okamura Barbers Traditional Craftsmanship"
                   className="w-full h-full object-cover brightness-[0.85] scale-[1.35] sm:scale-[1.4] origin-[50%_30%] hover:scale-[1.45] transition-all duration-700"
                   referrerPolicy="no-referrer"
@@ -454,7 +470,7 @@ export default function App() {
                 className="relative overflow-hidden rounded-2xl border border-neutral-800 shadow-2xl aspect-4/3 bg-neutral-950"
               >
                 <img
-                  src="/src/assets/images/Okamura-interior.jpg"
+                  src={okamuraInteriorImg}
                   alt="Okamura Barbers Retro Shop Interior"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.75] hover:brightness-90"
                   referrerPolicy="no-referrer"
@@ -612,7 +628,7 @@ export default function App() {
       </section>
 
       {/* 10. Access Section */}
-      <AccessSection exteriorImage="/src/assets/images/Okamura-exterior.jpg" />
+      <AccessSection exteriorImage={okamuraExteriorImg} />
 
       {/* 11. Footer Section */}
       <footer className="bg-neutral-950 border-t border-neutral-900/60 py-16 md:py-20 relative overflow-hidden font-sans text-neutral-400 text-xs md:text-sm">
@@ -629,7 +645,7 @@ export default function App() {
                 {/* Visual Custom Logo with white color text */}
                 <div className="flex items-center select-none" id="footer-logo">
                   <img
-                    src="/src/assets/images/Okamura-logo02.svg"
+                    src={okamuraLogoImg}
                     alt="Okamura Barbers"
                     className="h-10 w-auto object-contain"
                     referrerPolicy="no-referrer"
