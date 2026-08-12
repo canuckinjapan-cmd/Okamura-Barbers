@@ -226,7 +226,7 @@ export default function App() {
                 className="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-gold-400"
               >
                 <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                <span>Since 1950 — Buzen, Fukuoka - TEST</span>
+                <span>Since 1950 — Buzen, Fukuoka - TESTING, TESTING</span>
               </motion.div>
 
               <motion.h1
