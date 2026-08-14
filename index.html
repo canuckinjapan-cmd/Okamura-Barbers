@@ -6,14 +6,14 @@
     
     <!-- SEO Meta Tags -->
     <title>福岡県豊前市の理容室・バーバー | Okamura Barbers（オシャレヘアーオカムラ）</title>
-    <meta name="description" content="福岡県豊前市千束で昭和25年(1950年)創業の老舗理容室「オシャレヘアーオカムラ（Okamura Barbers）」。三世代にわたり受け継がれる丁寧な顔剃り、極上のハサミ技術、そして最先端のフェードカットやメンズパーマ。駐車場4台完備・ネット予約受付中。" />
+    <meta name="description" content="福岡県豊前市千束で昭和25年(1950年)創業の老舗理容室「オシャレヘアーオカムラ（Okamura Barbers）」。三世代にわたり受け継がれる技術とおもてなしで皆さまをお迎えします。" />
     <meta name="keywords" content="豊前市,理容室,バーバー,床屋,岡村理容店,オシャレヘアーオカムラ,宇島駅,福岡県,フェードカット,顔剃り,メンズカット" />
     <meta name="author" content="Okamura Barbers" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="福岡県豊前市の理容室・バーバー | Okamura Barbers（オシャレヘアーオカムラ）" />
-    <meta property="og:description" content="昭和25年創業、豊前市で三代続くアットホームな老舗理容室。確かな技術力と現代のトレンドを融合した特別な空間をご体感ください。" />
+    <meta property="og:description" content="昭和25年創業、豊前市で三代続くアットホームな老舗理容室。確かな技術力と現代のトレンドを融合した特別な体験を提供します。" />
     <meta property="og:image" content="/src/assets/images/Okamura-exterior.jpg" />
     <meta property="og:locale" content="ja_JP" />
 
@@ -87,15 +87,7 @@
             "name": "駐車場はありますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "はい、店舗横に無料の専用駐車場を4台分ご用意しております（別途駐車場あり）。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "初めての来店ですが、ウェブ割引は使えますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい！初めてご来店いただくお客様限定で「Web限定1,000円OFFクーポン」がご利用いただけます。ネット予約時に適用するか、お会計時にこちらのサイトをご提示ください。"
+              "text": "はい、店舗横に無料の専用駐車場を4台分ご用意しております。"
             }
           }
         ]
@@ -103,8 +95,39 @@
     </script>
   </head>
   <body class="bg-neutral-950 text-neutral-200 antialiased overflow-x-hidden">
-    <div id="root"></div>
+    <!-- The original app expects a built React bundle. GitHub Pages serves static files and does not run Vite.
+         To ensure the live site isn't blank while the repository is served directly, include a simple
+         static fallback inside #root. When a proper production build (vite build) is deployed, the React
+         app can replace this content.
+    -->
+
+    <div id="root">
+      <main style="font-family: system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; color:#E6E6E6; background:#0b0b0d; min-height:60vh; padding:36px 20px; box-sizing:border-box;">
+        <section style="max-width:900px;margin:0 auto;">
+          <header style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+            <img src="/src/assets/images/Okamura-logo02.svg" alt="Okamura Barbers" style="height:48px;" onerror="this.style.display='none'" />
+            <div>
+              <h1 style="margin:0;font-size:20px;color:#fff;font-weight:700">オシャレヘアーオカムラ (Okamura Barbers)</h1>
+              <p style="margin:0;color:#bfbfbf;font-size:13px">昭和25年創業 — 福岡県豊前市千束256</p>
+            </div>
+          </header>
+
+          <p style="color:#cfcfcf;line-height:1.6">現在、サイトはデモ・プレースホルダーのコンテンツを表示しています。リポジトリに含まれるソースはVite + React + TypeScriptで作られており、GitHub Pagesに表示するにはビルド済みの静的ファイルをデプロイする必要があります。</p>
+
+          <ul style="color:#cfcfcf;line-height:1.6">
+            <li><strong>電話：</strong><a href="tel:0979-82-5007" style="color:#ffd782">0979-82-5007</a></li>
+            <li><strong>営業時間：</strong>08:30 - 19:00（最終受付 18:00）</li>
+            <li><strong>定休日：</strong>ほぼ年中無休</li>
+            <li><strong>Web限定クーポン：</strong>OKAMURA500（500円OFF）</li>
+          </ul>
+
+          <p style="color:#cfcfcf;line-height:1.6">開発者向けメモ: To publish the full React site on GitHub Pages, run <code style="background:#111;padding:2px 6px;border-radius:4px;color:#fff">npm run build</code> and deploy the generated <code style="background:#111;padding:2px 6px;border-radius:4px;color:#fff">dist</code> folder to GitHub Pages (docs/ or gh-pages branch). See the project's README for details.</p>
+
+          <p style="margin-top:22px;color:#9f9f9f;font-size:12px">リポジトリ: <a href="https://github.com/canuckinjapan-cmd/Okamura-Barbers" target="_blank" rel="noopener noreferrer" style="color:#ffd782">canuckinjapan-cmd/Okamura-Barbers</a></p>
+        </section>
+      </main>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
