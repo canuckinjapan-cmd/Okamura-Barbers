@@ -67,8 +67,14 @@
 
 ```text
 okamura-barbers/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Actions 自動デプロイ設定 (GitHub Pages)
+├── public/
+│   └── assets/              # 静的アセット配信用ミラーディレクトリ
+│       └── images/
 ├── src/
-│   ├── assets/              # ヴィンテージ写真・画像アセット
+│   ├── assets/              # 高解像度画像・ロゴ・写真アセット
 │   │   └── images/
 │   ├── components/          # 再利用可能なUIコンポーネント
 │   │   ├── AccessSection.tsx    # アクセス・マップ・店舗情報
@@ -81,14 +87,31 @@ okamura-barbers/
 │   ├── App.tsx              # メインアプリケーションコンポーネント
 │   ├── index.css            # Tailwind CSS v4 設定 & カスタムアニメーション
 │   ├── main.tsx             # アプリケーションエントリーポイント
-│   └── types.ts             # TypeScript型定義
+│   ├── types.ts             # TypeScript型定義
+│   └── vite-env.d.ts        # Vite画像モジュール型定義 (.jpg, .svg 等)
 ├── .env.example             # 環境変数サンプル
+├── .gitignore               # Git除外設定
 ├── AGENTS.md                # AIエージェント向けの開発ガイドライン
 ├── DESIGN.md                # デザインシステム＆トークン仕様書
 ├── metadata.json            # アプリケーションメタデータ
+├── package-lock.json        # 依存パッケージロックファイル
 ├── package.json             # 依存関係＆npmスクリプト
-└── vite.config.ts           # Vite設定ファイル
+└── vite.config.ts           # Vite設定ファイル (base: '/Okamura-Barbers/')
 ```
+
+---
+
+## 🖼️ 画像アセットの管理ルール (Asset Management)
+
+- **配置場所**: 画像ファイルは `src/assets/images/` 配下に格納します。
+- **インポート方式**: Reactコンポーネント内では文字列パス (`"/assets/..."`) を直接記述するのではなく、**ViteのESモジュールインポート**を使用します。
+  ```tsx
+  import heroImg from './assets/images/hero_barber_cut_1783583051614-new01.jpg';
+  
+  <img src={heroImg} alt="Hero" />
+  ```
+  ※ これにより、ローカル環境・AI Studioプレビュー・GitHub Pages (`/Okamura-Barbers/`) のいずれの配信パスでも自動的に正しいURLへ解決されます。
+- **型定義**: 画像ファイルのインポートをTypeScriptで安全に扱うため、`src/vite-env.d.ts` に各種拡張子 (`*.jpg`, `*.png`, `*.svg` など) のモジュール定義を含めています。
 
 ---
 

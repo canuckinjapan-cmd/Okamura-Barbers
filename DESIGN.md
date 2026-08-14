@@ -119,3 +119,13 @@ Defined in `@theme` inside `src/index.css`:
 - **Scroll Reveal**: `motion.div` with initial `opacity: 0, y: 20` animated to `opacity: 1, y: 0`.
 - **Gold Shimmer Effect**: Custom `.shimmer-bg` class for highlighted coupon cards.
 - **Hover Scale**: Micro scale transformations (`hover:scale-[1.02]`) on cards and buttons.
+
+---
+
+## 📸 6. Imagery & Photography Guidelines
+
+- **Asset Storage**: Store all primary media in `src/assets/images/`.
+- **Hero Image**: Aspect ratio `3:4` (mobile) to `4:5` / `3:4` (desktop), subtle brightness reduction (`brightness-[0.85]`) with focus on precision cutting techniques.
+- **Service Cards**: Aspect ratio `16:9` or `4:3`, subtle zoom on hover (`group-hover:scale-105 transition-transform duration-700`).
+- **Timeline Historical Photos**: Antique tones, sepia / monochrome vintage filter effects matching the 1950s heritage narrative.
+- **Instagram Gallery**: Square `1:1` grid items with dark gradient overlay caption reveal on hover.

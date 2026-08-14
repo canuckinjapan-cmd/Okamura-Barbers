@@ -43,13 +43,31 @@ Welcome! This file provides essential guidelines and context for AI agents worki
   - `src/components/BookingModal.tsx`: Web reservation form modal.
   - `src/components/Logo.tsx`: Barber pole sign logo.
 
-### 3. Icon Imports
+### 3. Asset & Image Management
+- **Directory**: Store all local images and SVGs in `src/assets/images/` (mirrored in `public/assets/images/`).
+- **Import Standard**: Always use Vite ES module imports for images in TypeScript/React files instead of hardcoding absolute string paths (`"/assets/images/..."`):
+  ```tsx
+  // ✅ Correct: Vite handles base paths automatically across environments
+  import heroImg from './assets/images/hero_barber_cut_1783583051614-new01.jpg';
+  <img src={heroImg} alt="..." />
+
+  // ❌ Forbidden: Breaks when repository subpath /Okamura-Barbers/ is active
+  <img src="/assets/images/hero_barber_cut_1783583051614-new01.jpg" alt="..." />
+  ```
+- **Type Declarations**: Module declarations for image extensions (`.jpg`, `.jpeg`, `.png`, `.svg`, `.webp`) are maintained in `src/vite-env.d.ts`.
+
+### 4. Icon Imports
 - Always import icons directly from `lucide-react`:
   ```tsx
   import { Scissors, Phone, MapPin, Clock } from 'lucide-react';
   ```
 
-### 4. Verification & Build
+### 5. Build, GitHub Pages & CI/CD
+- **Base Path**: `vite.config.ts` must maintain `base: '/Okamura-Barbers/'` for GitHub Pages hosting compatibility.
+- **Workflow**: Automated deployment workflow is configured in `.github/workflows/deploy.yml` (triggers on `main` and `master`).
+- **Lockfile**: Always keep `package-lock.json` in sync for GitHub Actions CI runner reliability.
+
+### 6. Verification & Build
 - Before finishing any task, run `npm run lint` (or call `lint_applet` / `compile_applet`) to ensure no TypeScript compilation or missing import errors.
 
 ---
