@@ -125,6 +125,28 @@ npm run preview
 
 ---
 
+## 🌐 GitHub Pages への公開手順 (Deployment)
+
+### 方法 1: GitHub Actions による自動デプロイ（推奨）
+このリポジトリには `.github/workflows/deploy.yml` が含まれています。
+
+1. GitHub リポジトリの **Settings**（設定）を開きます。
+2. 左メニューの **Pages** を選択します。
+3. **Build and deployment** > **Source** を **`GitHub Actions`** に変更します。
+4. `main` ブランチにプッシュするだけで、GitHub Actions が自動的に Vite プロダクションビルドを行い、GitHub Pages に即座に公開されます。
+
+### 方法 2: 手動デプロイ (gh-pages)
+ローカルから手動でデプロイする場合：
+
+```bash
+# ビルドを行い、gh-pages ブランチに公開
+npm run deploy
+```
+
+※ 方法2を使用する場合は、GitHub リポジトリの **Settings** > **Pages** で **Source** を **`Deploy from a branch`**、ブランチを **`gh-pages / (root)`** に設定してください。
+
+---
+
 ## 📍 店舗情報 (Store Details)
 
 - **屋号**: オシャレヘアーオカムラ (Okamura Barbers)
