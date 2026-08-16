@@ -37,6 +37,9 @@ export default function StorySection({ timelineEvents }: StorySectionProps) {
             豊前の地と共に歩んだ歴史
           </h2>
           <span className="text-xs font-mono tracking-widest text-gold-700 font-bold uppercase mt-1">Our Story</span>
+          <p className="text-xs text-neutral-600 font-sans mt-2">
+            ※沿革部分は仮原稿です。正式な内容はお話を伺ったうえで作成します。
+          </p>
           <div className="h-0.5 w-24 bg-gold-800/60 mx-auto mt-4" />
         </div>
 

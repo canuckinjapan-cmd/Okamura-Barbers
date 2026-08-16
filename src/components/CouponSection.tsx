@@ -27,7 +27,7 @@ export default function CouponSection({ onBookWithCoupon }: CouponSectionProps) 
             <span className="font-serif text-xs uppercase tracking-widest font-semibold">Special Offer</span>
           </div>
           <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight">
-            ホームページ開設記念キャンペーン
+            ホームページ開設記念キャンペーン（案）
           </h2>
           <div className="h-0.5 w-12 bg-gradient-to-r from-gold-500 to-gold-700 mx-auto mt-4" />
         </div>

@@ -5,14 +5,14 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-> **75年の歴史と職人技が息づく、福岡県豊前市のモダンバーバー**  
+> **1950年から続くと職人技が息づく、福岡県豊前市のモダンバーバー**  
 > 1950年創業。三代にわたり継承されてきた伝統の理容技術と、現代のメンズカット・フェードスタイルを融合させた「岡村理容美容館」の公式Webアプリケーションです。
 
 ---
 
 ## 📖 概要 (Project Overview)
 
-「岡村理容美容館 (Okamura Barbers)」は、福岡県豊前市千束で創業75年を迎えた老舗理容店です。  
+「岡村理容美容館 (Okamura Barbers)」は、福岡県豊前市千束で1950年から続く老舗理容店です。  
 高度経済成長期から地域に根差し、初代・岡村一郎から二代目・二郎、そして三代目へと親子の温かいもてなしと確かな技術が継承されてきました。
 
 本Webアプリケーションは、店舗の温かみと清潔感を伝えるデザインシステム、24時間対応のWeb来店予約システム、Web限定クーポン、1950年から続く歩みを振り返るヒストリータイムライン、店舗アクセス情報（Google Map連携）を備えています。

@@ -424,10 +424,10 @@ export default function BookingModal({
                 </div>
                 
                 <h3 className="text-xl font-serif font-semibold text-white mb-1">
-                  ご予約ありがとうございます
+                  予約のお申し込みありがとうございます
                 </h3>
                 <p className="text-sm text-neutral-400 max-w-sm mb-6">
-                  ご入力いただいたメールアドレス宛の確認メール、またはお電話にてご予約確認のご連絡をさせていただきます。当日のお越しを心よりお待ちしております。
+                  ご入力いただいた内容を確認のうえ、メールまたはお電話にて予約確定のご連絡をいたします。
                 </p>
 
                 {/* Old-School Vintage Styling Ticket */}

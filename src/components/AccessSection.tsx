@@ -247,8 +247,8 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                   {/* Landmark: 豊前市役所 */}
                   <g>
                     <rect x="495" y="500" width="140" height="50" rx="6" fill="#181818" stroke="#444" strokeWidth="1" />
-                    <text x="565" y="520" fill="#ccc" fontSize="10" textAnchor="middle">豊前市役所</text>
-                    <text x="565" y="535" fill="#999" fontSize="8" textAnchor="middle">BUZEN CITY HALL</text>
+                    <text x="565" y="520" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">豊前市役所</text>
+                    <text x="565" y="535" fill="#ddd" fontSize="8" fontWeight="bold" textAnchor="middle">BUZEN CITY HALL</text>
                   </g>
 
                   {/* Landmark: Lawson (ローソン 豊前千束店) on the south side of Route 10 & Route 32 */}
@@ -264,7 +264,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                   <g>
                     <rect x="230" y="570" width="140" height="60" rx="8" fill="#221515" stroke="#ef4444" strokeWidth="1" />
                     <rect x="230" y="570" width="140" height="18" rx="4" fill="#ef4444" />
-                    <text x="300" y="582" fill="#fff" fontSize="9" fontWeight="extrabold" textAnchor="middle">〒 千束郵便局</text>
+                    <text x="300" y="582" fill="#fff" fontSize="9" fontWeight="black" textAnchor="middle" letterSpacing="0.5">〒POST OFFICE</text>
                     <text x="300" y="604" fill="#f87171" fontSize="11" fontWeight="bold" textAnchor="middle">千束郵便局</text>
                     <text x="300" y="619" fill="#f87171" fontSize="9" textAnchor="middle">（当店のすぐ隣）</text>
                   </g>
@@ -273,8 +273,8 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                   <g className="cursor-pointer" onClick={handleMapClick}>
                     <rect x="185" y="640" width="210" height="70" rx="10" fill="#1e1a12" stroke="#c18e38" strokeWidth="1.5" />
                     <rect x="185" y="640" width="210" height="18" rx="6" fill="#c18e38" />
-                    <text x="290" y="652" fill="#131313" fontSize="10" fontWeight="extrabold" textAnchor="middle">岡村理容美容館</text>
-                    <text x="290" y="674" fill="#fbf7ee" fontSize="12" fontWeight="bold" textAnchor="middle">Okamura Barbers</text>
+                    <text x="290" y="652" fill="#fff" fontSize="10" fontWeight="black" textAnchor="middle" letterSpacing="0.5">OKAMURA BARBERS</text>
+                    <text x="290" y="674" fill="#fbf7ee" fontSize="12" fontWeight="bold" textAnchor="middle">岡村理容美容館</text>
                     <text x="290" y="694" fill="#d4af37" fontSize="10" fontWeight="extrabold" textAnchor="middle">★ 当店はここです ★</text>
                   </g>
 

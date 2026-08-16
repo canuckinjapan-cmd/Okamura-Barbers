@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Scissors, Award, Clock, Star, Instagram, Facebook, ChevronDown, ChevronUp, 
@@ -201,6 +201,29 @@ export default function App() {
     }
   };
 
+  const scrollToAnchor = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (href === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const element = document.querySelector(href);
+    if (element) {
+      const contentTarget = element.querySelector<HTMLElement>('.inline-flex, h2, h3, h4, .section-header') || (element as HTMLElement);
+      const navHeader = document.getElementById('main-header');
+      const navHeight = navHeader ? navHeader.offsetHeight : 64;
+      const gap = 12;
+      const elementRect = contentTarget.getBoundingClientRect();
+      const currentScroll = window.scrollY || document.documentElement.scrollTop;
+      const targetTop = elementRect.top + currentScroll - navHeight - gap;
+
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-gold-500 selection:text-neutral-950 font-sans">
       
@@ -208,16 +231,16 @@ export default function App() {
       <Navbar onOpenBooking={() => openBookingWithService('')} />
 
       {/* 1. Hero Section */}
-      <section id="home" className="pt-28 md:pt-36 pb-20 md:pb-28 relative overflow-hidden flex items-center min-h-[90vh]">
+      <section id="home" className="pt-24 md:pt-36 md:landscape:pt-28 pb-20 md:pb-28 md:landscape:pb-20 relative overflow-hidden flex items-center min-h-[90vh] md:landscape:min-h-0">
         {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gold-500/5 to-transparent pointer-events-none" />
         <div className="absolute top-20 left-10 w-96 h-96 bg-gold-400/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center" id="hero-layout">
+          <div className="grid grid-cols-1 md:landscape:grid-cols-12 lg:grid-cols-12 gap-8 md:landscape:gap-8 lg:gap-8 items-center" id="hero-layout">
             
             {/* Hero Left Content */}
-            <div className="lg:col-span-7 space-y-6 md:space-y-8 text-left max-w-3xl">
+            <div className="md:landscape:col-span-7 lg:col-span-7 space-y-6 md:space-y-8 md:landscape:space-y-6 text-left max-w-3xl">
               
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -233,7 +256,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-2xl sm:text-3xl md:text-[2.2rem] lg:text-[2.65rem] xl:text-[3.25rem] font-serif font-bold text-white leading-tight tracking-tighter"
+                className="text-2xl sm:text-3xl md:text-[2.2rem] md:landscape:text-[2rem] lg:text-[2.65rem] xl:text-[3.25rem] font-serif font-bold text-white leading-tight tracking-tighter"
                 id="hero-headline"
               >
                 <span className="inline-block whitespace-nowrap">豊前市で、髪を切るなら。</span><br />
@@ -245,9 +268,9 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans max-w-2xl"
+                className="text-sm md:text-base md:landscape:text-sm lg:text-base text-neutral-300 leading-relaxed font-sans max-w-2xl"
               >
-                福岡県豊前市千束。（有）岡村理容美容館は創業75年の老舗として、2代目・3代目、そして頼もしいスタッフと共に日夜真心を込めて営業しております。理容本店（隣接美容室・築城美容室の3店舗展開）は月曜日も休まず営業中！「月曜日にしか行けない」というお客様や、思い立った当日の飛び込み来店も大歓迎です。昔ながらの丁寧なカミソリ技と現代のフェードカットで、すっきりと心地よい時間をお届けします。
+                福岡県豊前市千束。1950年創業の理容店として、二代目・三代目とスタッフが地域のみなさまをお迎えしています。地域のみなさまに支えられながら営業しています。理容本店（隣接美容室・築城美容室の3店舗展開）は月曜日も休まず営業中！「月曜日にしか行けない」というお客様や、思い立った当日の飛び込み来店も大歓迎です。昔ながらの丁寧なカミソリ技と現代のフェードカットで、すっきりと心地よい時間をお届けします。
               </motion.p>
 
               {/* Action Buttons */}
@@ -268,6 +291,7 @@ export default function App() {
 
                 <a
                   href="#access"
+                  onClick={(e) => scrollToAnchor(e, '#access')}
                   className="bg-neutral-900 hover:bg-neutral-850 text-gold-300 hover:text-gold-200 border border-neutral-800 hover:border-gold-400/40 text-center py-4 px-8 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-1.5 group"
                   id="hero-access-btn"
                 >
@@ -304,7 +328,7 @@ export default function App() {
             </div>
 
             {/* Hero Right Media */}
-            <div className="lg:col-span-5 h-full relative" id="hero-media-wrapper">
+            <div className="md:landscape:col-span-5 lg:col-span-5 h-full relative" id="hero-media-wrapper">
               
               {/* Back decoration: Golden frame border offset */}
               <div className="absolute -inset-2 border border-gold-400/10 rounded-2xl -translate-x-2 translate-y-2 pointer-events-none" />
@@ -314,7 +338,7 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="relative aspect-3/4 md:aspect-4/5 lg:aspect-3/4 overflow-hidden rounded-2xl border border-neutral-800/80 shadow-2xl bg-neutral-900"
+                className="relative aspect-3/4 md:aspect-4/5 md:landscape:aspect-3/4 lg:aspect-3/4 overflow-hidden rounded-2xl border border-neutral-800/80 shadow-2xl bg-neutral-900"
               >
                 <img
                   src={heroBarberCutImg}
@@ -326,14 +350,14 @@ export default function App() {
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent opacity-80" />
 
                 {/* Overlaid Floating Label */}
-                <div className="absolute bottom-6 left-6 right-6 bg-neutral-950/80 border border-neutral-850 backdrop-blur-md rounded-xl p-4 flex items-center justify-between shadow-xl">
-                  <div className="space-y-0.5">
-                    <p className="text-[10px] font-mono text-gold-400 font-bold uppercase tracking-widest">ESTABLISHED 1950</p>
-                    <h3 className="font-serif font-bold text-white text-sm sm:text-base">手仕事のあたたかみ、今も。</h3>
+                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 md:landscape:bottom-4 md:landscape:left-4 md:landscape:right-4 bg-neutral-950/80 border border-neutral-850 backdrop-blur-md rounded-xl p-3 sm:p-4 md:landscape:p-3 flex items-center justify-between gap-2 sm:gap-3 shadow-xl">
+                  <div className="space-y-0.5 min-w-0">
+                    <p className="text-[10px] font-mono text-gold-400 font-bold uppercase tracking-widest whitespace-nowrap">ESTABLISHED 1950</p>
+                    <h3 className="font-serif font-bold text-white text-xs sm:text-sm md:landscape:text-xs lg:text-base whitespace-nowrap">手仕事のあたたかみ、今も。</h3>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-[10px] text-neutral-500 font-semibold uppercase font-sans">Three Generations</p>
-                    <p className="text-xs text-gold-300 font-medium mt-0.5">三代続く技術継承</p>
+                    <p className="text-[10px] text-neutral-500 font-semibold uppercase font-sans whitespace-nowrap">Three Generations</p>
+                    <p className="text-xs text-gold-300 font-medium mt-0.5 whitespace-nowrap">三代続く技術継承</p>
                   </div>
                 </div>
               </motion.div>
@@ -447,7 +471,7 @@ export default function App() {
                   <CheckCircle2 className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold text-neutral-200 text-sm">英語フレンドリー (English Available)</h4>
-                    <p className="text-xs text-neutral-400 mt-1 leading-relaxed">三代目は英語対応も可能。近隣の英語指導助手(ALT)や外国人の方々も数多くご利用頂いています。</p>
+                    <p className="text-xs text-neutral-400 mt-1 leading-relaxed">三代目は英語対応も可能。近隣の英語指導助手(ALT)や外国人の方々もご利用頂いています。</p>
                   </div>
                 </div>
 
@@ -673,12 +697,13 @@ export default function App() {
                 メニューリンク
               </h4>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-                <li><a href="#home" className="hover:text-gold-300 transition-colors">ホーム</a></li>
-                <li><a href="#about" className="hover:text-gold-300 transition-colors">店舗紹介</a></li>
-                <li><a href="#services" className="hover:text-gold-300 transition-colors">施術メニュー</a></li>
-                <li><a href="#history" className="hover:text-gold-300 transition-colors">1950年から続く</a></li>
-                <li><a href="#coupon" className="hover:text-gold-300 transition-colors">限定クーポン</a></li>
-                <li><a href="#access" className="hover:text-gold-300 transition-colors">アクセス</a></li>
+                <li><a href="#home" onClick={(e) => scrollToAnchor(e, '#home')} className="hover:text-gold-300 transition-colors">ホーム</a></li>
+                <li><a href="#about" onClick={(e) => scrollToAnchor(e, '#about')} className="hover:text-gold-300 transition-colors">店舗紹介</a></li>
+                <li><a href="#services" onClick={(e) => scrollToAnchor(e, '#services')} className="hover:text-gold-300 transition-colors">メニュー</a></li>
+                <li><a href="#history" onClick={(e) => scrollToAnchor(e, '#history')} className="hover:text-gold-300 transition-colors">歴史</a></li>
+                <li><a href="#reviews" onClick={(e) => scrollToAnchor(e, '#reviews')} className="hover:text-gold-300 transition-colors">口コミ</a></li>
+                <li><a href="#coupon" onClick={(e) => scrollToAnchor(e, '#coupon')} className="hover:text-gold-300 transition-colors">クーポン</a></li>
+                <li><a href="#access" onClick={(e) => scrollToAnchor(e, '#access')} className="hover:text-gold-300 transition-colors">アクセス</a></li>
               </ul>
             </div>
 
@@ -690,15 +715,15 @@ export default function App() {
               <p className="text-neutral-500 text-xs leading-relaxed">
                 インスタグラムやフェイスブックでも情報発信しています。お気軽にフォローしてください。
               </p>
-              <div className="flex gap-4">
+              <div className="flex items-center gap-5 pt-1">
                 <a
                   href="https://www.instagram.com/osyare_okamura/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-850 flex items-center justify-center text-neutral-400 hover:text-gold-300 hover:border-gold-400/30 transition-all duration-200"
+                  className="text-neutral-400 hover:text-gold-300 transition-colors duration-200 p-1 inline-flex items-center justify-center"
                   aria-label="Instagram Page"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Instagram className="w-6 h-6" />
                 </a>
                 
                 {/* Facebook Page Link */}
@@ -706,10 +731,10 @@ export default function App() {
                   href="https://www.facebook.com/profile.php?id=100064740484712"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-850 flex items-center justify-center text-neutral-400 hover:text-gold-300 hover:border-gold-400/30 transition-all duration-200"
+                  className="text-neutral-400 hover:text-gold-300 transition-colors duration-200 p-1 inline-flex items-center justify-center"
                   aria-label="Facebook Page"
                 >
-                  <Facebook className="w-5 h-5" />
+                  <Facebook className="w-6 h-6" />
                 </a>
 
                 {/* LINE Official Page Link */}
@@ -717,11 +742,11 @@ export default function App() {
                   href="https://page.line.me/xvm8157z"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-850 flex items-center justify-center text-neutral-400 hover:text-gold-300 hover:border-gold-400/30 transition-all duration-200"
+                  className="text-neutral-400 hover:text-gold-300 transition-colors duration-200 p-1 inline-flex items-center justify-center"
                   aria-label="LINE Official Account"
                 >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M22 10.5C22 5.8 17.5 2 12 2S2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.3.4.1.9.3 1 .6.1.3.1.8 0 1.1l-.2 1c-.1.3-.2 1.2 1 .7s6.8-4 9.3-6.9c1.6-1.8 2.4-3.7 2.4-5.8zm-13.7 2.2h-1.6c-.3 0-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5h1.6c.3 0 .5.2.5.5s-.2.5-.5.5h-1.1v1.1h1.1c.3 0 .5.2.5.5s-.2.5-.5.5h-1.1v1.2h1.1c.3 0 .5.2.5.5 0 .2-.2.5-.5.5zm2.9-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5s.5.2.5.5v4.1zm3.8 0c0 .3-.2.5-.5.5-.2 0-.3-.1-.4-.2l-2-2.7v2.4c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5.2 0 .3.1.4.2l2 2.7V8.1c0-.3.2-.5.5-.5s.5.2.5.5v4.1zm3.8-2.9h-1.6V8.1c0-.3-.2-.5-.5-.5s-.5.2-.5.5v4.1c0 .3.2.5.5.5h2.1c.3 0 .5-.2.5-.5s-.2-.5-.5-.5z"/>
+                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-14.888 2.213h-1.745c-.328 0-.594-.265-.594-.593V7.279c0-.328.266-.593.594-.593.328 0 .593.265.593.593v3.612h1.152c.328 0 .593.265.593.593 0 .328-.265.593-.593.593zm3.176-.593c0 .328-.265.593-.593.593-.328 0-.594-.265-.594-.593V7.279c0-.328.266-.593.594-.593.328 0 .593.265.593.593v4.205zm4.188 0c0 .328-.266.593-.594.593-.198 0-.374-.097-.482-.246l-2.072-2.775v2.428c0 .328-.266.593-.594.593-.328 0-.593-.265-.593-.593V7.279c0-.328.265-.593.593-.593.199 0 .375.097.483.246l2.072 2.775V7.279c0-.328.266-.593.594-.593.328 0 .594.265.594.593v4.205zm4.188-3.019h-1.745v.852h1.745c.328 0 .593.265.593.593 0 .328-.265.593-.593.593h-1.745v.981h1.745c.328 0 .593.265.593.593 0 .328-.265.593-.593.593h-2.339c-.328 0-.593-.265-.593-.593V7.279c0-.328.265-.593.593-.593h2.339c.328 0 .593.265.593.593 0 .328-.265.593-.593.593z" />
                   </svg>
                 </a>
               </div>

@@ -103,7 +103,7 @@ export default function ServicesSection({ onSelectService, services, reviews }: 
 
         {/* Customer Reviews Section replacing the previous bottom block */}
         {reviews && reviews.length > 0 && (
-          <div className="mt-20 md:mt-28 pt-16 border-t border-neutral-900 font-sans" id="customer-reviews-block">
+          <div className="mt-20 md:mt-28 pt-16 border-t border-neutral-900 font-sans" id="reviews">
             {/* Section Header */}
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
               <div className="inline-flex items-center gap-2 text-gold-400 mb-3 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full">
