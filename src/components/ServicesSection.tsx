@@ -24,14 +24,14 @@ export default function ServicesSection({ onSelectService, services, reviews }: 
         <div className="text-center max-w-5xl mx-auto mb-16 md:mb-24">
           <div className="inline-flex items-center gap-2 text-gold-400 mb-3 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full">
             <Scissors className="w-3.5 h-3.5" />
-            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Precision Services</span>
+            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Services</span>
           </div>
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-serif font-bold text-white tracking-tight leading-tight sm:whitespace-nowrap">
-            洗練された技術と至福の施術メニュー
+            施術メニュー
           </h2>
           <div className="h-0.5 w-16 bg-gradient-to-r from-gold-500 to-gold-700 mx-auto mt-6 mb-4" />
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed">
-            三代にわたり磨き抜かれた伝統の理容技術。お一人おひとりの骨格や髪質、ライフスタイルに合わせ、最高の仕上がりをご提案します。すべてのカットメニューには眉カットとシャンプーが含まれます。
+            三代にわたり受け継いできた理容の技術。髪質や日頃の手入れのしやすさに合わせて、丁寧に整えます。すべてのカットメニューに眉カットとシャンプーが含まれています。
           </p>
         </div>
 
@@ -115,7 +115,7 @@ export default function ServicesSection({ onSelectService, services, reviews }: 
               </h2>
               <div className="h-0.5 w-16 bg-gradient-to-r from-gold-500 to-gold-700 mx-auto mt-5 mb-4" />
               <p className="text-neutral-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                常連のお客様から初めてご来店いただいたお客様まで、オカムラ理容館に寄せられた嬉しいお声をご紹介いたします。私たちの励みであり、宝物です。
+                常連のお客様から初めてご来店いただいたお客様まで、岡村理容美容館に寄せられた嬉しいお声をご紹介いたします。私たちの励みであり、宝物です。
               </p>
             </div>
 

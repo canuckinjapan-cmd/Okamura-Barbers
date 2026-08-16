@@ -12,7 +12,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 
-// Google Maps Place URL for オシャレヘアーオカムラ
+// Google Maps Place URL for 岡村理容美容館
 const GOOGLE_MAPS_URL = "https://www.google.com/maps/place/%E3%82%AA%E3%82%B7%E3%83%A3%E3%83%AC%E3%83%98%E3%82%A2%E3%83%BC%E3%82%AA%E3%82%AB%E3%83%A0%E3%83%A9/@33.6021594,131.1268357,17z/data=!4m18!1m9!3m8!1s0x3543facecf444a01:0x581b0456e84edfae!2z44Kq44K344Oj44Os44OY44Ki44O844Kq44Kr44Og44Op!8m2!3d33.6021079!4d131.1266645!9m1!1b1!16s%2Fg%2F1vfp5_rk!3m7!1s0x3543facecf444a01:0x581b0456e84edfae!8m2!3d33.6021079!4d131.1266645!9m1!1b1!16s%2Fg%2F1vfp5_rk?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D";
 
 // Type Imports
@@ -50,7 +50,7 @@ const SERVICES: Service[] = [
     nameEn: 'Standard Haircut Course',
     price: 3660,
     duration: 45,
-    description: '三世代にわたり磨かれた岡村伝統のカット。シャンプー、丁寧なブロー、襟剃り、さらには心地よい眉カットまでがすべて含まれた基本コースです。',
+    description: '創業以来受け継がれてきた丁寧なカット。シャンプー、ブロー、襟剃り、眉カットまで一通りそろった基本のコースです。',
     image: modelFadeImg,
     isPopular: true,
   },
@@ -60,7 +60,7 @@ const SERVICES: Service[] = [
     nameEn: 'Student & Youth Cut',
     price: 2500,
     duration: 30,
-    description: '幼児から高校生までを対象としたカット。動いてしまう小さなお子様でも優しくあやしながらスピーディに仕上げ、校則に合わせた爽やかな髪型を提供します。',
+    description: '幼児から高校生までを対象としたカット。小さなお子様も安心していただけるよう優しく手早く仕上げ、校則に合わせた爽やかな髪型に整えます。',
     image: kidsCutImg,
   },
   {
@@ -69,7 +69,7 @@ const SERVICES: Service[] = [
     nameEn: 'Premium Skin Fade Cut',
     price: 4500,
     duration: 50,
-    description: 'ミリ単位で色彩を調整する高難度フェードスタイル。伝統的なカミソリによる輪郭調整と、現代のバーバースタイルの融合をご体感ください。',
+    description: 'グラデーションの美しい刈り上げスタイル。際（きわ）の処理までカミソリできれいに整え、清潔感のある短髪に仕上げます。',
     image: modelPermImg,
   },
   {
@@ -78,7 +78,7 @@ const SERVICES: Service[] = [
     nameEn: 'Beard Design & Shave',
     price: 2000,
     duration: 20,
-    description: 'お客様の顔立ち、顎の骨格に最適な髭のデザインをご提案します。長さを均一にし、カミソリで境界線をきれいに整えて大人の品格を引き出します。',
+    description: '髭の長さを均等に整え、輪郭をカミソリでくっきりと剃り揃えます。毎朝のお手入れが楽になり、清潔感のある印象に整えます。',
     image: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80',
   },
 ];
@@ -86,7 +86,7 @@ const SERVICES: Service[] = [
 const TIMELINE_EVENTS: TimelineEvent[] = [
   {
     year: 1950,
-    title: '初代・岡村一郎が豊前市千束に「岡村理容店」を創業',
+    title: '初代・岡村一郎が豊前市千束に「岡村理容美容館」を創業',
     description: '昭和25年、豊前市で最初の第一歩を踏み出しました。当時としては珍しい最先端のカットハサミを導入し、街で親しまれる理容店として愛され始めました。',
     badge: '創業 (1950)',
     image: vintageToolsImg,
@@ -106,10 +106,10 @@ const TIMELINE_EVENTS: TimelineEvent[] = [
     image: okamuraExteriorImg,
   },
   {
-    year: 2025,
-    title: '店舗をリニューアル。レトロモダンな空間へ昇華',
-    description: '店舗をリニューアル。伝統技術に現代のフェードカットやスカルプスパを融合し、豊前の地域に寄り添い進化し続けています。',
-    badge: '75周年・リニュアル'
+    year: 2021,
+    title: '店舗をリニューアル。快適で清潔感のある空間へ',
+    description: '店舗をリニューアル。長年の技術にフェードカットや頭皮ケアも取り入れ、地域に寄り添い続けています。',
+    badge: '71周年・リニュアル'
   }
 ];
 
@@ -145,12 +145,12 @@ const FAQS: FaqItem[] = [
   {
     id: 'faq-1',
     question: '予約をしなくても散髪できますか？',
-    answer: '空きがある場合はご案内可能ですが、当店は「完全予約優先制」となっておりませんが、お待たせせずスムーズにご案内するため、事前にお電話（0979-82-5007）またはホームページ上の「ネット予約」をご活用いただくことをおすすめいたします。',
+    answer: '空きがあれば予約なしでもご案内できますが、予約のお客様を優先しております。待ち時間を少なくするため、事前にお電話またはネット予約をご利用ください。',
   },
   {
     id: 'faq-3',
     question: '駐車場はありますか？何台とめられますか？',
-    answer: 'はい、店舗のすぐ横（隣接）に無料の専用駐車場を「4台分」完備しております。また、郵便局の反対側にある広めの駐車場にも駐車スペースがございますので、大きめのミニバンやセダンでも安心してお越しいただけます。',
+    answer: 'はい、店舗のすぐ隣（隣接）に無料の専用駐車場を「4台分」完備しております。また、郵便局の反対側にある広めの駐車場にも駐車スペースがございますので、大きめのミニバンやセダンでも安心してお越しいただけます。',
   },
   {
     id: 'faq-5',
@@ -238,17 +238,16 @@ export default function App() {
               >
                 <span className="inline-block whitespace-nowrap">豊前市で、髪を切るなら。</span><br />
                 <span className="inline-block whitespace-nowrap">昭和から地域に寄り添ってきた</span><br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400 inline-block whitespace-nowrap">オシャレヘアー岡村</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400 inline-block whitespace-nowrap">岡村理容美容館</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-sm md:text-base text-neutral-400 leading-relaxed font-sans max-w-2xl"
+                className="text-sm md:text-base text-neutral-300 leading-relaxed font-sans max-w-2xl"
               >
-                福岡県豊前市千束。昭和25年の創業以来、脈々と受け継がれてきた「手仕事のぬくもり」と「職人のこだわり」。
-                三代目が紡ぐ洗練されたフェードスタイルと伝統のカミソリ技で、あなた史上最高の清潔感とリラックスした時間をお約束します。
+                福岡県豊前市千束。（有）岡村理容美容館は創業75年の老舗として、2代目・3代目、そして頼もしいスタッフと共に日夜真心を込めて営業しております。理容本店（隣接美容室・築城美容室の3店舗展開）は月曜日も休まず営業中！「月曜日にしか行けない」というお客様や、思い立った当日の飛び込み来店も大歓迎です。昔ながらの丁寧なカミソリ技と現代のフェードカットで、すっきりと心地よい時間をお届けします。
               </motion.p>
 
               {/* Action Buttons */}
@@ -367,7 +366,7 @@ export default function App() {
             <div className="space-y-1 border-l border-neutral-900 md:border-neutral-850/80">
               <span className="block text-3xl md:text-4xl font-serif font-bold text-gold-400 tracking-tight">3代</span>
               <span className="block text-[11px] md:text-xs text-neutral-400 font-bold tracking-widest uppercase">
-                受け継がれる極上技術
+                受け継がれる確かな技
               </span>
             </div>
 
@@ -413,8 +412,8 @@ export default function App() {
               </div>
 
               <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
-                オカムラ理容館は、アットホームな昭和の懐かしさを残しつつ、洗練された現代のトレンドを取り入れた不思議な居心地の良さがあるお店です。
-                「散髪屋は緊張して話しづらい…」「おしゃれな美容室は気後れしてしまう…」といったお悩みを解決する、親しみやすく丁寧な理容体験を大切にしています。
+                1950年の創業以来、地域のみなさまに親しまれてきた理容店です。
+                昔ながらの丁寧な理容技術を大切にしながら、フェードカットなど現代のスタイルにも対応しています。
               </p>
 
               {/* Feature Bullet Checklist Cards */}
@@ -439,8 +438,8 @@ export default function App() {
                 <div className="p-4 bg-neutral-950/40 border border-neutral-850 rounded-xl flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-neutral-200 text-sm">三代目の最旬フェード</h4>
-                    <p className="text-xs text-neutral-400 mt-1 leading-relaxed">都内一流メンズサロンでの経験を活かし、流行のフェードカットやニュアンスパーマを豊前で提供。</p>
+                    <h4 className="font-semibold text-neutral-200 text-sm">三代目が手がけるフェードスタイル</h4>
+                    <p className="text-xs text-neutral-400 mt-1 leading-relaxed">伝統の理容技術を受け継ぎながら、人気のフェードカットやニュアンスパーマなど、現代のスタイルにも幅広く対応しています。</p>
                   </div>
                 </div>
 
@@ -471,7 +470,7 @@ export default function App() {
               >
                 <img
                   src={okamuraInteriorImg}
-                  alt="Okamura Barbers Retro Shop Interior"
+                  alt="Okamura Barbers Modern Shop Interior"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.75] hover:brightness-90"
                   referrerPolicy="no-referrer"
                   loading="lazy"
@@ -481,7 +480,7 @@ export default function App() {
                 <div className="absolute bottom-4 left-4 right-4 bg-neutral-950/80 border border-neutral-850 backdrop-blur-md rounded-xl p-3 flex items-center justify-between text-xs">
                   <div>
                     <h4 className="font-semibold text-white">店内の雰囲気</h4>
-                    <p className="text-[10px] text-neutral-400 mt-0.5">昭和レトロな青い革張り理容椅子と心地よい温かな空間</p>
+                    <p className="text-[10px] text-neutral-400 mt-0.5">清潔感あふれるモダンな設備と心地よい温かな空間</p>
                   </div>
                   <span className="font-mono text-gold-400 font-bold uppercase tracking-widest text-[9px] bg-gold-400/10 border border-gold-400/30 px-2 py-0.5 rounded">Our Salon</span>
                 </div>
@@ -493,13 +492,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. Our Story Section (Since 1950) */}
+      {/* 5. Our Story Section*/}
       <StorySection timelineEvents={TIMELINE_EVENTS} />
 
       {/* 6. Highlighted Coupon Section */}
       <CouponSection onBookWithCoupon={openBookingWithCoupon} />
 
-      {/* 7. Instagram Gallery Grid */}
+      {/* 7. Instagram Grid */}
       <section className="py-20 md:py-28 bg-neutral-900/20 relative overflow-hidden font-sans">
         <div className="w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           
@@ -508,7 +507,7 @@ export default function App() {
             <div className="space-y-3 max-w-2xl text-left">
               <div className="inline-flex items-center gap-2 text-gold-400 bg-neutral-950 border border-neutral-850 px-3 py-1 rounded-full">
                 <Instagram className="w-3.5 h-3.5" />
-                <span className="font-serif text-xs uppercase tracking-widest font-semibold">Instagram Gallery</span>
+                <span className="font-serif text-xs uppercase tracking-widest font-semibold">Instagram</span>
               </div>
               <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight">
                 インスタグラムで最旬スタイルを公開中
@@ -570,7 +569,7 @@ export default function App() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 text-gold-400 mb-3 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full">
               <HelpCircle className="w-3.5 h-3.5" />
-              <span className="font-serif text-xs uppercase tracking-widest font-semibold">Frequently Asked Questions</span>
+              <span className="font-serif text-xs uppercase tracking-widest font-semibold">FAQ</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight">
               よくあるご質問（FAQ）
@@ -677,7 +676,7 @@ export default function App() {
                 <li><a href="#home" className="hover:text-gold-300 transition-colors">ホーム</a></li>
                 <li><a href="#about" className="hover:text-gold-300 transition-colors">店舗紹介</a></li>
                 <li><a href="#services" className="hover:text-gold-300 transition-colors">施術メニュー</a></li>
-                <li><a href="#history" className="hover:text-gold-300 transition-colors">75年の歩み</a></li>
+                <li><a href="#history" className="hover:text-gold-300 transition-colors">1950年から続く</a></li>
                 <li><a href="#coupon" className="hover:text-gold-300 transition-colors">限定クーポン</a></li>
                 <li><a href="#access" className="hover:text-gold-300 transition-colors">アクセス</a></li>
               </ul>
@@ -711,6 +710,19 @@ export default function App() {
                   aria-label="Facebook Page"
                 >
                   <Facebook className="w-5 h-5" />
+                </a>
+
+                {/* LINE Official Page Link */}
+                <a
+                  href="https://page.line.me/xvm8157z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-neutral-900 border border-neutral-850 flex items-center justify-center text-neutral-400 hover:text-gold-300 hover:border-gold-400/30 transition-all duration-200"
+                  aria-label="LINE Official Account"
+                >
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 10.5C22 5.8 17.5 2 12 2S2 5.8 2 10.5c0 4.2 3.6 7.7 8.5 8.3.4.1.9.3 1 .6.1.3.1.8 0 1.1l-.2 1c-.1.3-.2 1.2 1 .7s6.8-4 9.3-6.9c1.6-1.8 2.4-3.7 2.4-5.8zm-13.7 2.2h-1.6c-.3 0-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5h1.6c.3 0 .5.2.5.5s-.2.5-.5.5h-1.1v1.1h1.1c.3 0 .5.2.5.5s-.2.5-.5.5h-1.1v1.2h1.1c.3 0 .5.2.5.5 0 .2-.2.5-.5.5zm2.9-.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5s.5.2.5.5v4.1zm3.8 0c0 .3-.2.5-.5.5-.2 0-.3-.1-.4-.2l-2-2.7v2.4c0 .3-.2.5-.5.5s-.5-.2-.5-.5V8.1c0-.3.2-.5.5-.5.2 0 .3.1.4.2l2 2.7V8.1c0-.3.2-.5.5-.5s.5.2.5.5v4.1zm3.8-2.9h-1.6V8.1c0-.3-.2-.5-.5-.5s-.5.2-.5.5v4.1c0 .3.2.5.5.5h2.1c.3 0 .5-.2.5-.5s-.2-.5-.5-.5z"/>
+                  </svg>
                 </a>
               </div>
             </div>

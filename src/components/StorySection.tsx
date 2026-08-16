@@ -34,9 +34,9 @@ export default function StorySection({ timelineEvents }: StorySectionProps) {
           </div>
           
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-neutral-900 tracking-tight leading-tight">
-            豊前の地と共に歩んだ75年の軌跡
+            豊前の地と共に歩んだ歴史
           </h2>
-          <span className="text-xs font-mono tracking-widest text-gold-700 font-bold uppercase mt-1">Our Story Since 1950</span>
+          <span className="text-xs font-mono tracking-widest text-gold-700 font-bold uppercase mt-1">Our Story</span>
           <div className="h-0.5 w-24 bg-gold-800/60 mx-auto mt-4" />
         </div>
 

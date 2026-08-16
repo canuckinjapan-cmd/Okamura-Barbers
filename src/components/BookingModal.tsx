@@ -56,10 +56,8 @@ export default function BookingModal({
       let shortName = service.name;
       if (service.id === 'haircut' || service.id === 'standard') shortName = 'スタンダードカット';
       else if (service.id === 'kids') shortName = 'キッズ＆学生カット';
-      else if (service.id === 'senior') shortName = 'シニアカット(65歳~)';
       else if (service.id === 'fade') shortName = 'プレミアムフェード';
       else if (service.id === 'beard') shortName = '髭デザイン＆トリム';
-      else if (service.id === 'shave') shortName = 'マイルドシェービング';
 
       return `${shortName} — ¥${service.price.toLocaleString()}`;
     }
@@ -91,19 +89,13 @@ export default function BookingModal({
     setFormData((prev) => ({ ...prev, [name]: checked }));
   };
 
-  // Business logic: Shop closed on Mondays
+  // Store is open every day
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const dateVal = e.target.value;
     if (!dateVal) return;
 
-    const day = new Date(dateVal).getDay();
-    if (day === 1) { // 1 is Monday
-      setError('申し訳ございません。月曜日は定休日となっております。別の日にちを選択してください。');
-      setFormData((prev) => ({ ...prev, date: '' }));
-    } else {
-      setError('');
-      setFormData((prev) => ({ ...prev, date: dateVal }));
-    }
+    setError('');
+    setFormData((prev) => ({ ...prev, date: dateVal }));
   };
 
   const selectedService = services.find((s) => s.id === formData.serviceId);
@@ -281,7 +273,7 @@ export default function BookingModal({
                           required
                         >
                           <option value="">時間を選択してください</option>
-                          <option value="08:30">09:00 (始業)</option>
+                          <option value="08:30">08:30 (始業)</option>
                           <option value="09:00">09:00</option>
                           <option value="09:30">09:30</option>
                           <option value="10:00">10:00</option>

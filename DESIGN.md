@@ -2,7 +2,7 @@
 design_system:
   name: "Okamura Barbers Retro-Modern Design System"
   version: "1.0.0"
-  brand: "オシャレヘアーオカムラ"
+  brand: "岡村理容美容館"
   established: 1950
   archetype: "Retro-Modern Japanese Luxury Barber"
   color_palette:
@@ -23,7 +23,7 @@ design_system:
 
 # 💈 DESIGN.md — Okamura Barbers Design System
 
-This document specifies the visual identity, token architecture, component patterns, and UI design rules for **オシャレヘアーオカムラ (Okamura Barbers)**.
+This document specifies the visual identity, token architecture, component patterns, and UI design rules for **岡村理容美容館 (Okamura Barbers)**.
 
 ---
 
@@ -128,4 +128,4 @@ Defined in `@theme` inside `src/index.css`:
 - **Hero Image**: Aspect ratio `3:4` (mobile) to `4:5` / `3:4` (desktop), subtle brightness reduction (`brightness-[0.85]`) with focus on precision cutting techniques.
 - **Service Cards**: Aspect ratio `16:9` or `4:3`, subtle zoom on hover (`group-hover:scale-105 transition-transform duration-700`).
 - **Timeline Historical Photos**: Antique tones, sepia / monochrome vintage filter effects matching the 1950s heritage narrative.
-- **Instagram Gallery**: Square `1:1` grid items with dark gradient overlay caption reveal on hover.
+- **Instagram**: Square `1:1` grid items with dark gradient overlay caption reveal on hover.

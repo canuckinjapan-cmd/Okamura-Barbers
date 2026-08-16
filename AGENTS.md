@@ -1,12 +1,12 @@
 # 🤖 AGENTS.md — Okamura Barbers AI Developer Guidelines
 
-Welcome! This file provides essential guidelines and context for AI agents working on the **オシャレヘアーオカムラ (Okamura Barbers)** codebase.
+Welcome! This file provides essential guidelines and context for AI agents working on the **岡村理容美容館 (Okamura Barbers)** codebase.
 
 ---
 
 ## 📌 Project Overview & Brand Identity
 
-- **App Name**: オシャレヘアーオカムラ (Okamura Barbers)
+- **App Name**: 岡村理容美容館 (Okamura Barbers)
 - **Location**: 福岡県豊前市千束256 (Buzen City, Fukuoka Prefecture, Japan)
 - **Phone**: `0979-82-5007`
 - **Hours**: 08:30 - 19:00 (Last call 18:00) | Open almost every day (ほぼ年中無休)
@@ -38,7 +38,7 @@ Welcome! This file provides essential guidelines and context for AI agents worki
   - `src/components/Navbar.tsx`: Header navigation and mobile drawer.
   - `src/components/ServicesSection.tsx`: Service menu cards & customer reviews grid.
   - `src/components/StorySection.tsx`: 75-year timeline section.
-  - `src/components/CouponSection.tsx`: Web limited offer coupon card.
+  - `src/components/CouponSection.tsx`: Special offer coupon card.
   - `src/components/AccessSection.tsx`: Google Maps, store details, and FAQ.
   - `src/components/BookingModal.tsx`: Web reservation form modal.
   - `src/components/Logo.tsx`: Barber pole sign logo.

@@ -32,7 +32,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
     { name: 'ホーム', href: '#home' },
     { name: '店舗紹介', href: '#about' },
     { name: '施術メニュー', href: '#services' },
-    { name: '75年の歩み', href: '#history' },
+    { name: '1950年から続く', href: '#history' },
     { name: '限定クーポン', href: '#coupon' },
     { name: 'アクセス', href: '#access' },
   ];

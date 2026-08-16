@@ -24,7 +24,7 @@ export default function CouponSection({ onBookWithCoupon }: CouponSectionProps) 
         <div className="text-center max-w-2xl mx-auto mb-6 md:mb-8">
           <div className="inline-flex items-center gap-2 text-gold-400 mb-3 bg-neutral-950 border border-neutral-800 px-3 py-1 rounded-full">
             <Ticket className="w-3.5 h-3.5 animate-pulse" />
-            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Web Limited Offer</span>
+            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Special Offer</span>
           </div>
           <h2 className="text-2xl md:text-4xl font-serif font-bold text-white tracking-tight">
             ホームページ開設記念キャンペーン

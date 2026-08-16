@@ -16,7 +16,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
       icon: <MapPin className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />,
       label: '住所',
       value: '〒828-0053 福岡県豊前市千束256',
-      subtext: '※千束郵便局すぐ近く。店舗横駐車場4台＋郵便局反対側に広め駐車場あり。'
+      subtext: '※千束郵便局すぐ隣。店舗横に無料駐車場4台分。満車の場合は、千束郵便局の反対側にある駐車場もご利用いただけます。'
     },
     {
       icon: <Phone className="w-5 h-5 text-gold-400 shrink-0 mt-0.5" />,
@@ -54,7 +54,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
         <div className="max-w-3xl mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 text-gold-400 mb-3 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full">
             <MapPin className="w-3.5 h-3.5" />
-            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Location & Access</span>
+            <span className="font-serif text-xs uppercase tracking-widest font-semibold">Access</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight leading-tight">
             店舗情報・アクセス
@@ -74,7 +74,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
             {/* Shop Details Cards */}
             <div className="space-y-6 bg-neutral-900/40 border border-neutral-800/80 p-6 md:p-8 rounded-2xl">
               <h3 className="text-xl font-serif font-bold text-white border-b border-neutral-800 pb-3">
-                オシャレヘアーオカムラ (Okamura Barbers)
+                岡村理容美容館 (Okamura Barbers)
               </h3>
               
               <div className="space-y-6">
@@ -143,7 +143,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
               />
               {/* Glassmorphic description tag */}
               <div className="absolute bottom-4 left-4 right-4 bg-neutral-950/70 border border-neutral-800 backdrop-blur-md rounded-xl p-3 text-xs text-left">
-                <h4 className="font-semibold text-white">オシャレヘアーオカムラ 外観</h4>
+                <h4 className="font-semibold text-white">岡村理容美容館 外観</h4>
                 <p className="text-neutral-400 mt-0.5 w-full">イエロー壁とグリーンのオーニングが目印です</p>
               </div>
             </motion.div>
@@ -269,11 +269,11 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                     <text x="300" y="619" fill="#f87171" fontSize="9" textAnchor="middle">（当店のすぐ隣）</text>
                   </g>
 
-                  {/* OUR SHOP: オシャレヘアーオカムラ next to the Post Office */}
+                  {/* OUR SHOP: 岡村理容美容館 next to the Post Office */}
                   <g className="cursor-pointer" onClick={handleMapClick}>
                     <rect x="185" y="640" width="210" height="70" rx="10" fill="#1e1a12" stroke="#c18e38" strokeWidth="1.5" />
                     <rect x="185" y="640" width="210" height="18" rx="6" fill="#c18e38" />
-                    <text x="290" y="652" fill="#131313" fontSize="10" fontWeight="extrabold" textAnchor="middle">オシャレヘアーオカムラ</text>
+                    <text x="290" y="652" fill="#131313" fontSize="10" fontWeight="extrabold" textAnchor="middle">岡村理容美容館</text>
                     <text x="290" y="674" fill="#fbf7ee" fontSize="12" fontWeight="bold" textAnchor="middle">Okamura Barbers</text>
                     <text x="290" y="694" fill="#d4af37" fontSize="10" fontWeight="extrabold" textAnchor="middle">★ 当店はここです ★</text>
                   </g>
@@ -291,7 +291,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                     <circle cx="365" cy="180" r="16" fill="rgba(193,142,56,0.15)" stroke="#c18e38" strokeWidth="1" />
                     <path d="M361,184 L369,176 M369,176 L364,176 M369,176 L369,181" stroke="#c18e38" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     {/* Text */}
-                    <text x="395" y="174" fill="#fff" fontSize="13" fontWeight="bold">オシャレヘアーオカムラ</text>
+                    <text x="395" y="174" fill="#fff" fontSize="13" fontWeight="bold">岡村理容美容館</text>
                     <text x="395" y="193" fill="#aaa" fontSize="10">〒828-0053 福岡県豊前市千束256</text>
                   </g>
 
@@ -313,7 +313,7 @@ export default function AccessSection({ exteriorImage }: AccessSectionProps) {
                     <foreignObject x="395" y="605" width="40" height="95" className="overflow-visible">
                       <div 
                         className="relative w-7 h-20 mx-auto bg-amber-50 border-2 border-gold-800 rounded-full overflow-hidden shadow-xl flex flex-col justify-between cursor-pointer group hover:scale-110 transition-transform duration-300"
-                        title="オシャレヘアーオカムラ"
+                        title="岡村理容美容館"
                       >
                         {/* Spinning barber pole stripes */}
                         <div className="absolute inset-0 w-full h-full overflow-hidden">
