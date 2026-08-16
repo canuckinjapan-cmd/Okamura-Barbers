@@ -38,7 +38,7 @@ Welcome! This file provides essential guidelines and context for AI agents worki
   - `src/components/Navbar.tsx`: Header navigation and mobile drawer.
   - `src/components/ServicesSection.tsx`: Service menu cards & customer reviews grid.
   - `src/components/StorySection.tsx`: 75-year timeline section.
-  - `src/components/CouponSection.tsx`: Special offer coupon card.
+  - `src/components/CouponSection.tsx`:  offer coupon card.
   - `src/components/AccessSection.tsx`: Google Maps, store details, and FAQ.
   - `src/components/BookingModal.tsx`: Web reservation form modal.
   - `src/components/Logo.tsx`: Barber pole sign logo.
