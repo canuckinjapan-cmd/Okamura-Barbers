@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
-import { ZoomIn, ZoomOut, RotateCcw, Move } from 'lucide-react';
+import { Move } from 'lucide-react';
 
 interface AccessMapProps {
   onShopClick: () => void;
@@ -57,7 +57,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
         const currentScale = scaleRef.current;
         const currentPos = positionRef.current;
 
-        // Center offset from container center
         const cx = focusPoint.x - rect.left - rect.width / 2;
         const cy = focusPoint.y - rect.top - rect.height / 2;
 
@@ -75,14 +74,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
     },
     [clampPosition]
   );
-
-  const zoomIn = () => {
-    zoomTo(Math.round((scaleRef.current + 0.5) * 10) / 10);
-  };
-
-  const zoomOut = () => {
-    zoomTo(Math.round((scaleRef.current - 0.5) * 10) / 10);
-  };
 
   const resetZoom = () => {
     setScale(1);
@@ -102,7 +93,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
 
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 2) {
-        // 2-Finger Pinch Gesture Started
         e.preventDefault();
         isPinching = true;
         setIsGesturing(true);
@@ -126,13 +116,11 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
         dragStartRef.current = { x: touch.clientX, y: touch.clientY };
         dragStartPositionRef.current = { ...positionRef.current };
 
-        // If already zoomed in, prevent vertical scrolling so user can pan the map freely
         if (scaleRef.current > 1.05) {
           e.preventDefault();
           setIsGesturing(true);
         }
 
-        // Detect double-tap to zoom
         const now = Date.now();
         if (now - lastTapRef.current < 280) {
           e.preventDefault();
@@ -150,7 +138,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
 
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length === 2 && isPinching && initialTouchDistance > 0) {
-        // Active Pinch to Zoom
         e.preventDefault();
         hasMovedRef.current = true;
 
@@ -176,7 +163,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
           });
         }
       } else if (e.touches.length === 1 && scaleRef.current > 1.05) {
-        // Active 1-finger Pan when zoomed in
         e.preventDefault();
         const touch = e.touches[0];
         const dx = touch.clientX - dragStartRef.current.x;
@@ -206,7 +192,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
         isPinching = false;
         setIsGesturing(false);
 
-        // Snap to bounds if needed
         if (scaleRef.current <= 1.05) {
           setScale(1);
           setPosition({ x: 0, y: 0 });
@@ -214,7 +199,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
           setPosition((prev) => clampPosition(prev.x, prev.y, scaleRef.current));
         }
       } else if (e.touches.length === 1) {
-        // Switched from 2 fingers to 1 finger
         isPinching = false;
         const touch = e.touches[0];
         dragStartRef.current = { x: touch.clientX, y: touch.clientY };
@@ -235,7 +219,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
     };
   }, [clampPosition, zoomTo]);
 
-  // Desktop Mouse Drag Handling
   const handleMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 0) return;
     isMouseDownRef.current = true;
@@ -264,7 +247,6 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
     setIsGesturing(false);
   };
 
-  // Safe wrapper for clicking shop pin
   const handleShopClick = useCallback(
     (e: React.MouseEvent) => {
       if (hasMovedRef.current) {
@@ -371,12 +353,12 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
   {/* Base styling definitions */}
   <rect
      width="800"
-     height="855"
+     height="887.69989"
      fill="#131313"
      id="rect459"
      x="0"
      y="114.72565"
-     style={{ strokeWidth: 0.919472 }} />
+     style={{"strokeWidth":"0.919472"}} />
   {/* Water bodies (Buzen Sea at the top) */}
   <rect
      x="0"
@@ -386,7 +368,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fill="#101a26"
      opacity="0.6"
      id="rect461"
-     style={{ fill: "#1a3191", fillOpacity: 1, strokeWidth: 1.76556 }} />
+     style={{"fill":"#1a3191","fillOpacity":"1","strokeWidth":"1.76556"}} />
   <text
      x="463.05844"
      y="228.04977"
@@ -397,15 +379,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      letterSpacing="4"
      fontWeight="bold"
      id="text463"
-     style={{ letterSpacing: "0px", fill: "#5275ff", fillOpacity: 1, fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", textAnchor: "middle" }}><tspan
+     style={{"letterSpacing":"0px","fill":"#5275ff","fillOpacity":"1","fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","textAnchor":"middle"}}><tspan
+      
        id="tspan1216"
        x="463.05844"
        y="228.04977"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>周防灘 (Suo-nada sea)</tspan><tspan
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>周防灘 (Suo-nada sea)</tspan><tspan
+      
        id="tspan1218"
        x="463.05844"
        y="242.58768"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }} /></text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}} /></text>
   {/* Area Grids & Block Labels */}
   <text
      x="231.91791"
@@ -415,15 +399,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontFamily="sans-serif"
      fontWeight="bold"
      id="text465"
-     style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", fill: "#777777" }}><tspan
+     style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","fill":"#777777"}}><tspan
+      
        id="tspan2884"
        x="231.91791"
        y="390.06848"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>八屋エリア</tspan><tspan
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>八屋エリア</tspan><tspan
+      
        id="tspan2886"
        x="231.91791"
        y="410.06848"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>(HACHIYA)</tspan></text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>(HACHIYA)</tspan></text>
   <text
      x="716.22778"
      y="389.9726"
@@ -432,15 +418,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontFamily="sans-serif"
      fontWeight="bold"
      id="text467"
-     style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", fill: "#777777" }}><tspan
+     style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","fill":"#777777"}}><tspan
+      
        id="tspan2880"
        x="716.22778"
        y="389.9726"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>赤熊エリア</tspan><tspan
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>赤熊エリア</tspan><tspan
+      
        id="tspan2882"
        x="716.22778"
        y="409.9726"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>(AKAGUMA)</tspan></text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>(AKAGUMA)</tspan></text>
   <g
      id="g473"
      transform="translate(-36.207741,24.002885)">
@@ -452,15 +440,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontFamily="sans-serif"
        fontWeight="bold"
        id="text469"
-       style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", fill: "#777777" }}><tspan
+       style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","fill":"#777777"}}><tspan
+        
          id="tspan3040"
          x="71.246574"
          y="514.46576"
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>千束西エリア</tspan><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>千束西エリア</tspan><tspan
+        
          id="tspan3042"
          x="71.246574"
          y="534.46576"
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>(CHIZUKA)</tspan></text>
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>(CHIZUKA)</tspan></text>
     <text
        x="140"
        y="546"
@@ -478,15 +468,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontFamily="sans-serif"
      fontWeight="bold"
      id="text475"
-     style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", fill: "#777777" }}><tspan
+     style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","fill":"#777777"}}><tspan
+      
        id="tspan3044"
        x="666.23792"
        y="621.08612"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>吉木エリア</tspan><tspan
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>吉木エリア</tspan><tspan
+      
        id="tspan3046"
        x="666.23792"
        y="641.08612"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAlign: "center", textAnchor: "middle" }}>(YOSHIKI)</tspan></text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAlign":"center","textAnchor":"middle"}}>(YOSHIKI)</tspan></text>
   {/* JR Nippo Main Line railway track at the top */}
   <path
      d="M-50,310 L850,310"
@@ -512,13 +504,13 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontFamily="monospace"
      fontWeight="bold"
      id="text483"
-     style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "monospace", fill: "#888888" }}><tspan
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+     style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"monospace","fill":"#888888"}}><tspan
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
        id="tspan3565">JR日豊本線 (JR NIPPO MAIN LINE)</tspan></text>
   {/* JR Unoshima Station (宇島駅) at the top center-left */}
   <g
      id="g495"
-     style={{ display: "inline" }}>
+     style={{"display":"inline"}}>
     <rect
        x="278.7406"
        y="284.97348"
@@ -537,7 +529,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="3.3976018"
        fill="#dc2626"
        id="rect487"
-       style={{ strokeWidth: 1.04503 }} />
+       style={{"strokeWidth":"1.04503"}} />
     <text
        x="359.35751"
        y="298"
@@ -547,8 +539,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text489"
-       style={{ fontWeight: "bold", fontSize: "9px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"9px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2866">Unoshima station</tspan></text>
     <text
        x="357.53201"
@@ -559,8 +551,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text491"
-       style={{ fontWeight: "bold", fontSize: "12px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "18.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"12px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"18.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2870">JR 宇島駅</tspan></text>
     <circle
        cx="430"
@@ -577,7 +569,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontSize="9"
      fontFamily="sans-serif"
      id="text501"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#777777" }}>県道113号線</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","fill":"#777777"}}>県道113号線</text>
   <text
      x="42"
      y="446"
@@ -585,53 +577,60 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontSize="9"
      fontFamily="sans-serif"
      id="text507"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#777777" }}>県道103号線</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","fill":"#777777"}}>県道103号線</text>
   {/* Route 103 crossing in the middle */}
   <path
      d="M-50,345 L850,345"
      stroke="#181818"
      strokeWidth="16"
-     id="path497" />
+     id="path497"
+     />
   <path
      d="M-50,460 L850,460"
      stroke="#181818"
      strokeWidth="16"
-     id="path503" />
+     id="path503"
+     />
   {/* Main North-South road (Route 32 / 千束通り) */}
   <path
      d="M 470,316 V 966.96321"
      stroke="#1c1c1c"
      strokeWidth="30.7425"
      id="path509"
-     style={{ fill: "#ff0000" }} />
+     style={{"fill":"#ff0000"}}
+     />
   <path
      d="M-50,750 L850,820"
      stroke="#1c1c1c"
      strokeWidth="48"
      strokeLinecap="square"
-     id="path521" />
+     id="path521"
+     />
   <path
      d="M 470,316 V 966.96321"
      stroke="#262626"
      strokeWidth="17.5672"
      id="path511"
-     style={{ fill: "#ffffff", stroke: "#3c3c3c", strokeOpacity: 1 }} />
+     style={{"fill":"#ffffff","stroke":"#3c3c3c","strokeOpacity":"1"}}
+     />
   <path
      d="M-50,345 L850,345"
      stroke="#222222"
      strokeWidth="6"
      id="path499"
-     style={{ stroke: "#3c3c3c", strokeOpacity: 1 }} />
+     style={{"stroke":"#3c3c3c","strokeOpacity":"1"}}
+     />
   <path
      d="M -50,460 H 850"
      stroke="#222222"
      strokeWidth="6"
      id="path505"
-     style={{ display: "inline", stroke: "#3c3c3c", strokeOpacity: 1 }} />
+     style={{"display":"inline","stroke":"#3c3c3c","strokeOpacity":"1"}}
+     />
   {/* Route 32 Shield/Badge */}
   <g
      id="g517"
-     style={{ display: "inline" }}>
+     style={{"display":"inline"}}>
     <path
        d="m 470,395 12,5 v 12 l -12,8 -12,-8 v -12 z"
        fill="#1d3557"
@@ -655,7 +654,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      strokeWidth="32"
      strokeLinecap="square"
      id="path523"
-     style={{ stroke: "#3c3c3c", strokeOpacity: 1 }} />
+     style={{"stroke":"#3c3c3c","strokeOpacity":"1"}}
+     />
   <text
      x="445"
      y="410"
@@ -664,7 +664,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      textAnchor="end"
      fontFamily="sans-serif"
      id="text519"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAnchor: "end", fill: "#888888" }}>県道32号線</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAnchor":"end","fill":"#888888"}}>県道32号線</text>
   <path
      d="M-50,750 L850,820"
      stroke="#c18e38"
@@ -680,7 +680,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      fontWeight="bold"
      transform="rotate(4.5)"
      id="text527"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#c18e38" }}>国道10号線 (ROUTE 10)</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","fill":"#c18e38"}}>国道10号線 (ROUTE 10)</text>
   <text
      x="838.88843"
      y="719.52289"
@@ -690,7 +690,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      textAnchor="end"
      transform="rotate(4.5)"
      id="text531"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAnchor: "end", fill: "#999999" }}>To Nakatsu 至 豊前・中津 →</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAnchor":"end","fill":"#999999"}}>To Nakatsu 至 豊前・中津 →</text>
   <text
      x="298.68097"
      y="792.758"
@@ -700,10 +700,11 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      textAnchor="end"
      transform="rotate(4.5)"
      id="text531-4"
-     style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", textAnchor: "end", fill: "#999999" }}>← 至 苅田・行橋 To Yukuhashi</text>
+     style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","textAnchor":"end","fill":"#999999"}}>← 至 苅田・行橋 To Yukuhashi</text>
   {/* Landmark: Udon Restaurant 豊前屋 官べえ */}
   <g
      id="g539"
+    
      transform="translate(-6,2)">
     <rect
        x="668.88208"
@@ -724,8 +725,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text535"
-       style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#d5a86a" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#d5a86a"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3048">豊前屋 官べえ</tspan></text>
     <text
        x="722.06219"
@@ -735,8 +736,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text537"
-       style={{ fontSize: "8px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#999999" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "10.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontSize":"8px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#999999"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"10.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3050">うどん店</tspan></text>
   </g>
   {/* Landmark: Family Mart */}
@@ -760,7 +761,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="3.5830657"
        fill="#15803d"
        id="rect543"
-       style={{ strokeWidth: 0.946868 }} />
+       style={{"strokeWidth":"0.946868"}} />
     <text
        x="557.20508"
        y="394"
@@ -771,8 +772,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text545"
-       style={{ fontWeight: "bold", fontSize: "9px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"9px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2868">Family Mart</tspan></text>
     <text
        x="557.52081"
@@ -783,8 +784,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text547"
-       style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2876">ファミリーマート</tspan></text>
     <text
        x="557.84375"
@@ -794,13 +795,14 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text549"
-       style={{ fontSize: "8px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#9fdfb0" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "10.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontSize":"8px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#9fdfb0"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"10.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2878">豊前市役所前店</tspan></text>
   </g>
   {/* Landmark: 豊前市役所 */}
   <g
      id="g561"
+    
      transform="translate(28.767123,1.1506849)">
     <rect
        x="495"
@@ -830,8 +832,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text557"
-       style={{ fontWeight: "bold", fontSize: "9px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"9px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2872">Buzen city hall</tspan></text>
     <text
        x="565"
@@ -842,8 +844,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text559"
-       style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2874">豊前市役所</tspan></text>
   </g>
   {/* Landmark: Lawson */}
@@ -868,7 +870,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="3.5311315"
        fill="#2563eb"
        id="rect565"
-       style={{ strokeWidth: 0.940267 }} />
+       style={{"strokeWidth":"0.940267"}} />
     <text
        x="571.65558"
        y="841"
@@ -879,8 +881,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text567"
-       style={{ fontWeight: "bold", fontSize: "9px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"9px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3052">Lawson</tspan></text>
     <text
        x="572"
@@ -891,19 +893,22 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text569"
-       style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#93c5fd" }}><tspan
+       style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#93c5fd"}}><tspan
+        
          id="tspan3057"
          x="572"
          y="862.2041"
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#ffffff" }}>ローソン</tspan><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","fill":"#ffffff"}}>ローソン</tspan><tspan
+        
          id="tspan3059"
          x="572"
          y="883.35681"
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#ffffff" }}>豊前千束店</tspan></text>
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>豊前千束店</tspan></text>
   </g>
   {/* Landmark: Senzoku Post Office (千束郵便局) */}
   <g
      id="g585"
+    
      transform="translate(-63.827289,-52.931506)">
     <rect
        x="243.78064"
@@ -923,7 +928,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="3.2125347"
        fill="#ef4444"
        id="rect577"
-       style={{ strokeWidth: 0.896947 }} />
+       style={{"strokeWidth":"0.896947"}} />
     <text
        x="300"
        y="584"
@@ -934,8 +939,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text579"
-       style={{ fontWeight: "bold", fontSize: "9px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"9px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3223">〒Post office</tspan></text>
     <text
        x="300"
@@ -946,8 +951,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text581"
-       style={{ fontWeight: "bold", fontSize: "11px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#f87171" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", fill: "#ffffff" }}
+       style={{"fontWeight":"bold","fontSize":"11px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#f87171"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","fill":"#ffffff"}}
          id="tspan3225">千束郵便局</tspan></text>
     <text
        x="300"
@@ -957,13 +962,12 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text583"
-       style={{ fontSize: "9px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#f87171" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "10.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontSize":"9px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#f87171"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"10.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3227">（当店のすぐ隣）</tspan></text>
   </g>
   {/* OUR SHOP: 岡村理容美容館 */}
-  <g
-     id="okamura-shop-card" className="cursor-pointer" onClick={handleShopClick}>
+  <g id="okamura-shop-card" className="cursor-pointer" onClick={handleShopClick}>
     <rect
        x="208.83339"
        y="639.95667"
@@ -974,7 +978,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        stroke="#c18e38"
        strokeWidth="1.41336"
        id="rect587"
-       style={{ strokeWidth: 1.413, strokeDasharray: "none" }} />
+       style={{"strokeWidth":"1.413","strokeDasharray":"none"}} />
     <rect
        x="208.83339"
        y="639.95667"
@@ -983,7 +987,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="5.3202839"
        fill="#c18e38"
        id="rect589"
-       style={{ strokeWidth: 0.942237 }} />
+       style={{"strokeWidth":"0.942237"}} />
     <text
        x="301.82767"
        y="654"
@@ -994,8 +998,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text591"
-       style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3229">Okamura Barbers</tspan></text>
     <text
        x="301.42795"
@@ -1006,8 +1010,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text593"
-       style={{ fontWeight: "bold", fontSize: "12px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#fbf7ee" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "18.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"12px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#fbf7ee"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"18.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3231">岡村理容美容館</tspan></text>
     <text
        x="301.99045"
@@ -1018,15 +1022,15 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text595"
-       style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#d4af37" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#d4af37"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3233">★ 当店はここです ★</tspan></text>
   </g>
   <g
      id="okamura-shop-card-7"
      transform="translate(55.116889,-76.726527)"
-     className="cursor-pointer"
-     onClick={handleShopClick}>
+    
+     style={{"strokeWidth":"1.413","strokeDasharray":"none"}}>
     <rect
        x="259.76004"
        y="635.91931"
@@ -1037,7 +1041,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        stroke="#c18e38"
        strokeWidth="0.818167"
        id="rect587-3"
-       style={{ strokeWidth: 1.413, strokeDasharray: "none" }} />
+       style={{"strokeWidth":"1.413","strokeDasharray":"none"}} />
     <rect
        x="259.79407"
        y="636.00037"
@@ -1046,7 +1050,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        rx="2.2520804"
        fill="#c18e38"
        id="rect589-2"
-       style={{ strokeWidth: 1.413, strokeDasharray: "none" }} />
+       style={{"strokeWidth":"1.413","strokeDasharray":"none"}} />
     <text
        x="299.09479"
        y="650.26025"
@@ -1057,8 +1061,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        letterSpacing="0.5"
        fontFamily="sans-serif"
        id="text591-5"
-       style={{ fontWeight: "bold", fontSize: "10px", fontFamily: "sans-serif", letterSpacing: 0.5, textAnchor: "middle", fill: "#ffffff", strokeWidth: 1.413, strokeDasharray: "none" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", strokeWidth: 1.413, strokeDasharray: "none" }}
+       style={{"fontWeight":"bold","fontSize":"10px","fontFamily":"sans-serif","letterSpacing":"0.5","textAnchor":"middle","fill":"#ffffff","strokeWidth":"1.413","strokeDasharray":"none"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","strokeWidth":"1.413","strokeDasharray":"none"}}
          id="tspan3229-4">K.Ko</tspan></text>
     <text
        x="298.69507"
@@ -1069,8 +1073,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text593-1"
-       style={{ fontWeight: "bold", fontSize: "12px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#fbf7ee", strokeWidth: 1.413, strokeDasharray: "none" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "18.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", strokeWidth: 1.413, strokeDasharray: "none" }}
+       style={{"fontWeight":"bold","fontSize":"12px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#fbf7ee","strokeWidth":"1.413","strokeDasharray":"none"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"18.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","strokeWidth":"1.413","strokeDasharray":"none"}}
          id="tspan3231-7">美容室</tspan></text>
   </g>
   {/* HAIR SALON IWASAKI */}
@@ -1094,16 +1098,14 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        textAnchor="middle"
        fontFamily="sans-serif"
        id="text600"
-       style={{ fontSize: "9px", fontFamily: "sans-serif", textAnchor: "middle", fill: "#999999" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "10.6667px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontSize":"9px","fontFamily":"sans-serif","textAnchor":"middle","fill":"#999999"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"10.6667px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan2888">Hair Salon Iwasaki</tspan></text>
   </g>
   {/* Floating Address Header at the top */}
-  <g
-     id="map-header"
+  <g id="map-header" className="cursor-pointer" onClick={handleShopClick}
      transform="translate(-288.38362,-4.3594649)"
-     className="cursor-pointer"
-     onClick={handleShopClick}>
+     style={{"strokeWidth":"1.00157","strokeDasharray":"none","paintOrder":"markers fill stroke"}}>
     <rect
        x="329.97736"
        y="149.97736"
@@ -1115,7 +1117,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        strokeWidth="0.919361"
        opacity="0.95"
        id="rect604"
-       style={{ strokeWidth: 1.0369, strokeDasharray: "none", paintOrder: "markers fill stroke" }} />
+       style={{"strokeWidth":"1.0369","strokeDasharray":"none","paintOrder":"markers fill stroke"}} />
     <circle
        cx="365"
        cy="180"
@@ -1124,7 +1126,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        stroke="#c18e38"
        strokeWidth="1"
        id="circle606"
-       style={{ strokeWidth: 1.00157, strokeDasharray: "none", paintOrder: "markers fill stroke" }} />
+       style={{"strokeWidth":"1.00157","strokeDasharray":"none","paintOrder":"markers fill stroke"}} />
     <path
        d="m 361,184 8,-8 m 0,0 h -5 m 5,0 v 5"
        stroke="#c18e38"
@@ -1132,7 +1134,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        strokeLinecap="round"
        strokeLinejoin="round"
        id="path608"
-       style={{ strokeWidth: 1.00157, strokeDasharray: "none", paintOrder: "markers fill stroke" }} />
+       style={{"strokeWidth":"1.00157","strokeDasharray":"none","paintOrder":"markers fill stroke"}} />
     <text
        x="392.00009"
        y="180.06488"
@@ -1141,8 +1143,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontWeight="bold"
        fontFamily="sans-serif"
        id="text610"
-       style={{ fontWeight: "bold", fontSize: "23.1912px", fontFamily: "sans-serif", fill: "#ffffff", strokeWidth: 1.78674, strokeDasharray: "none", paintOrder: "markers fill stroke" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "28.543px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", strokeWidth: 1.78674 }}
+       style={{"fontWeight":"bold","fontSize":"23.1912px","fontFamily":"sans-serif","fill":"#ffffff","strokeWidth":"1.78674","strokeDasharray":"none","paintOrder":"markers fill stroke"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"28.543px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","strokeWidth":"1.78674"}}
          id="tspan2862">岡村理容美容館</tspan></text>
     <text
        x="393.44693"
@@ -1151,15 +1153,15 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontSize="10px"
        fontFamily="sans-serif"
        id="text612"
-       style={{ fontSize: "9.16991px", fontFamily: "sans-serif", fill: "#aaaaaa", strokeWidth: 0.918431, strokeDasharray: "none", paintOrder: "markers fill stroke" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "12.2265px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal", strokeWidth: 0.918431 }}
+       style={{"fontSize":"9.16991px","fontFamily":"sans-serif","fill":"#aaaaaa","strokeWidth":"0.918431","strokeDasharray":"none","paintOrder":"markers fill stroke"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"12.2265px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal","strokeWidth":"0.918431"}}
          id="tspan2864">〒828-0053 福岡県豊前市千束256</tspan></text>
   </g>
   {/* Compass Indicator */}
   <g
      id="compass"
      transform="translate(-6.9160854,-122.45539)"
-     style={{ strokeWidth: 1.0015748, strokeDasharray: "none" }}>
+     style={{"strokeWidth":"1.0015748","strokeDasharray":"none"}}>
     <circle
        cx="740"
        cy="290"
@@ -1168,17 +1170,17 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        stroke="#2c2c2c"
        strokeWidth="1.5"
        id="circle615"
-       style={{ strokeWidth: 1.0015748, strokeDasharray: "none", stroke: "#c18e38", strokeOpacity: 1 }} />
+       style={{"strokeWidth":"1.0015748","strokeDasharray":"none","stroke":"#c18e38","strokeOpacity":"1"}} />
     <path
        d="m 740,274 5,16 -5,-4 -5,4 z"
        fill="#c18e38"
        id="path617"
-       style={{ strokeWidth: 1.0015748, strokeDasharray: "none" }} />
+       style={{"strokeWidth":"1.0015748","strokeDasharray":"none"}} />
     <path
        d="m 740,306 5,-16 -5,-4 -5,4 z"
        fill="#444444"
        id="path619"
-       style={{ strokeWidth: 1.0015748, strokeDasharray: "none" }} />
+       style={{"strokeWidth":"1.0015748","strokeDasharray":"none"}} />
     <text
        x="739.89832"
        y="265.88123"
@@ -1188,9 +1190,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontWeight="bold"
        fontFamily="sans-serif"
        id="text621"
-       style={{ strokeWidth: 1.00157, strokeDasharray: "none" }}>N</text>
+       style={{"strokeWidth":"1.00157","strokeDasharray":"none"}}>N</text>
   </g>
-  
   {/* Okamura Barbers Location Highlight Pin - Animated Retro Barber Pole on Map */}
   <g id="okamura-barber-pole-pin" className="cursor-pointer" onClick={handleShopClick}>
     {/* Ring aura pulse */}
@@ -1280,7 +1281,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
 
   {/* Access Info Overlay Card */}
   <g
-     id="access-info-card">
+     id="access-info-card"
+     transform="translate(-41.424656,0.57534245)">
     <rect
        x="79.953598"
        y="829.95361"
@@ -1292,7 +1294,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        strokeWidth="0.907194"
        opacity="0.9"
        id="rect679"
-       style={{ stroke: "#ffffff", strokeOpacity: 1 }} />
+       style={{"stroke":"#ffffff","strokeOpacity":"1"}} />
     <text
        x="99"
        y="860"
@@ -1301,8 +1303,8 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontWeight="bold"
        fontFamily="sans-serif"
        id="text681"
-       style={{ fontWeight: "bold", fontSize: "13px", fontFamily: "sans-serif", fill: "#ffffff" }}><tspan
-         style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "bold", fontStretch: "normal", fontSize: "16px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}
+       style={{"fontWeight":"bold","fontSize":"13px","fontFamily":"sans-serif","fill":"#ffffff"}}><tspan
+         style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"bold","fontStretch":"normal","fontSize":"16px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Bold'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}
          id="tspan3848">📍 周辺からのアクセス：</tspan></text>
     <text
        x="105"
@@ -1311,7 +1313,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontSize="11"
        fontFamily="sans-serif"
        id="text683"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>• JR宇島駅から徒歩約30分</text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>• JR宇島駅から徒歩約30分</text>
     <text
        x="105"
        y="902"
@@ -1319,7 +1321,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontSize="11"
        fontFamily="sans-serif"
        id="text685"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>• 豊前市役所から北に車で1分</text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>• 豊前市役所から北に車で1分</text>
     <text
        x="105"
        y="921"
@@ -1327,73 +1329,23 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        fontSize="11"
        fontFamily="sans-serif"
        id="text687"
-       style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>• 東九州自動車道 豊前ICから車で8分</text>
+       style={{"fontStyle":"normal","fontVariant":"normal","fontWeight":"normal","fontStretch":"normal","fontSize":"13.3333px","fontFamily":"sans-serif","-inkscape-font-specification":"'sans-serif, Normal'","fontVariantLigatures":"normal","fontVariantCaps":"normal","fontVariantNumeric":"normal","fontVariantEastAsian":"normal"}}>• 東九州自動車道 豊前ICから車で8分</text>
   </g>
 
         </svg>
       </div>
 
-      {/* Floating Zoom & Pan Controls */}
-      <div className="absolute top-3 right-3 z-30 flex flex-col items-center gap-1.5 bg-neutral-950/85 backdrop-blur-md p-1.5 rounded-xl border border-neutral-800/90 shadow-2xl pointer-events-auto">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            zoomIn();
-          }}
-          disabled={scale >= 4}
-          className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer"
-          aria-label="拡大"
-          title="拡大 (Zoom in)"
-        >
-          <ZoomIn className="w-4 h-4" />
-        </button>
-
-        <span className="text-[10px] font-mono font-bold text-gold-400 py-0.5 select-none px-1">
-          {Math.round(scale * 100)}%
-        </span>
-
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            zoomOut();
-          }}
-          disabled={scale <= 1}
-          className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer"
-          aria-label="縮小"
-          title="縮小 (Zoom out)"
-        >
-          <ZoomOut className="w-4 h-4" />
-        </button>
-
-        {scale > 1.05 && (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              resetZoom();
-            }}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 transition-all cursor-pointer border-t border-neutral-800/80 mt-0.5"
-            aria-label="全体表示に戻す"
-            title="全体表示に戻す (Reset zoom)"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </button>
-        )}
-      </div>
-
-      {/* Floating Guidance Badge */}
-      <div className="absolute bottom-3 left-3 z-30 pointer-events-none">
-        <div className="bg-neutral-950/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-neutral-800/90 text-[10px] text-neutral-300 flex items-center gap-1.5 shadow-lg">
+      {/* Floating Guidance Badge positioned bottom-right */}
+      <div className="absolute bottom-2 right-2 sm:bottom-2.5 sm:right-2.5 z-30 pointer-events-none">
+        <div className="bg-neutral-950/80 backdrop-blur-sm px-2 py-0.5 rounded-full border border-neutral-800/80 text-[8.5px] sm:text-[9.5px] text-neutral-300 flex items-center gap-1 shadow-md">
           {scale > 1.05 ? (
             <>
-              <Move className="w-3 h-3 text-gold-400 shrink-0" />
+              <Move className="w-2.5 h-2.5 text-gold-400 shrink-0" />
               <span>ドラッグで移動 / 2度押しでリセット</span>
             </>
           ) : (
             <>
-              <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse shrink-0" />
+              <span className="w-1 h-1 rounded-full bg-gold-400 animate-pulse shrink-0" />
               <span>2本指ピンチまたはダブルタップで拡大</span>
             </>
           )}
