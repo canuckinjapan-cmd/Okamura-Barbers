@@ -260,7 +260,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-gold-500 selection:text-neutral-950 font-sans">
+    <div className="min-h-screen bg-neutral-950 text-neutral-200 selection:bg-gold-500 selection:text-neutral-950 font-sans w-full max-w-full overflow-x-hidden">
       
       {/* Sticky Header */}
       <Navbar onOpenBooking={() => openBookingWithService('')} />
@@ -287,9 +287,9 @@ export default function App() {
                 className="text-2xl sm:text-3xl md:text-[2.2rem] md:landscape:text-[2rem] lg:text-[2.65rem] xl:text-[3.25rem] font-serif font-bold text-white leading-tight tracking-tighter"
                 id="hero-headline"
               >
-                <span className="inline-block whitespace-nowrap">豊前市で、髪を切るなら。</span><br />
-                <span className="inline-block whitespace-nowrap">昭和から地域に寄り添ってきた</span><br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400 inline-block whitespace-nowrap">岡村理容美容館</span>
+                <span className="inline-block">豊前市で、髪を切るなら。</span><br />
+                <span className="inline-block break-keep">昭和から地域に寄り添ってきた</span><br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400 inline-block">岡村理容美容館</span>
               </motion.h1>
 
               <motion.p
@@ -379,9 +379,9 @@ export default function App() {
 
                 {/* Overlaid Floating Label */}
                 <div className="absolute bottom-3 sm:bottom-3.5 left-3 sm:left-3.5 right-3 sm:right-3.5 bg-neutral-950/80 border border-neutral-850 backdrop-blur-md rounded-xl p-2.5 sm:p-3 flex items-center justify-between gap-2 shadow-xl">
-                  <div className="space-y-0.5 min-w-0">
-                    <p className="text-[10px] font-mono text-gold-400 font-bold uppercase tracking-widest whitespace-nowrap">ESTABLISHED 1950</p>
-                    <h3 className="font-serif font-bold text-white text-xs sm:text-sm md:landscape:text-xs lg:text-sm whitespace-nowrap">手仕事のあたたかみ、今も。</h3>
+                  <div className="space-y-0.5 min-w-0 flex-1">
+                    <p className="text-[10px] font-mono text-gold-400 font-bold uppercase tracking-widest truncate">ESTABLISHED 1950</p>
+                    <h3 className="font-serif font-bold text-white text-xs sm:text-sm md:landscape:text-xs lg:text-sm truncate">手仕事のあたたかみ、今も。</h3>
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-[10px] text-neutral-500 font-semibold uppercase font-sans whitespace-nowrap">Three Generations</p>

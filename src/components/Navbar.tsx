@@ -67,16 +67,16 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full max-w-full z-40 transition-all duration-300 ${
         isScrolled
           ? 'bg-neutral-950/90 backdrop-blur-md border-b border-neutral-900 shadow-lg py-2.5 md:py-3'
-          : 'bg-transparent border-b border-white/5 py-3.5 md:py-5'
+          : 'bg-transparent border-b border-white/5 py-3 md:py-5'
       }`}
       id="main-header"
     >
       <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo Left */}
-        <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="flex items-center shrink-0" aria-label="Okamura Barbers Home">
+        <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="flex items-center shrink-0 min-w-0 mr-2" aria-label="Okamura Barbers Home">
           <Logo />
         </a>
 
@@ -142,10 +142,10 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         </div>
 
         {/* Mobile & Tablet Menu Trigger (< 1024px) */}
-        <div className="flex lg:hidden items-center gap-2.5">
+        <div className="flex lg:hidden items-center gap-2 sm:gap-2.5 shrink-0">
           <button
             onClick={onOpenBooking}
-            className="bg-gold-400 hover:bg-gold-500 text-neutral-950 text-xs font-bold px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap cursor-pointer shrink-0"
+            className="bg-gold-400 hover:bg-gold-500 text-neutral-950 text-xs font-bold px-3 py-1.5 sm:px-3.5 rounded-full transition-all whitespace-nowrap cursor-pointer shrink-0 shadow-xs"
             aria-label="Quick reservation"
           >
             <span>予約</span>
@@ -153,12 +153,12 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-neutral-300 hover:text-white p-1.5 cursor-pointer rounded-lg hover:bg-neutral-900 transition-colors"
+            className="text-neutral-300 hover:text-white p-1 sm:p-1.5 cursor-pointer rounded-lg hover:bg-neutral-900 transition-colors shrink-0"
             id="mobile-menu-btn"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5.5 h-5.5 sm:w-6 sm:h-6" /> : <Menu className="w-5.5 h-5.5 sm:w-6 sm:h-6" />}
           </button>
         </div>
       </div>
