@@ -705,13 +705,13 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsCmsOpen(true)}
-                className="inline-flex items-center gap-1.5 text-[11px] text-neutral-500 hover:text-gold-400 transition-colors cursor-pointer py-0.5 px-1.5 rounded hover:bg-neutral-900/60"
+                className="inline-flex items-center gap-1.5 text-[11px] text-white hover:text-gold-300 transition-colors cursor-pointer py-0.5 px-2 rounded bg-neutral-900/80 border border-neutral-700/60 hover:border-gold-400/50 hover:bg-neutral-850"
                 title="店舗のお知らせ・営業案内を変更する（簡易CMS）"
                 aria-label="店舗お知らせの編集 (簡易CMS)"
                 id="footer-cms-btn"
               >
-                <Settings2 className="w-3 h-3 text-neutral-500 hover:text-gold-400 transition-colors" />
-                <span className="font-sans">お知らせ編集 [CMS]</span>
+                <Settings2 className="w-3 h-3 text-gold-400" />
+                <span className="font-sans text-white font-medium">お知らせ編集 [CMS]</span>
               </button>
             </div>
             <p className="flex items-center gap-1">
