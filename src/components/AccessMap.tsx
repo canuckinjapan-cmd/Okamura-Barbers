@@ -1,19 +1,309 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
+import { ZoomIn, ZoomOut, RotateCcw, Move } from 'lucide-react';
 
 interface AccessMapProps {
   onShopClick: () => void;
 }
 
 export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isGesturing, setIsGesturing] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scaleRef = useRef(1);
+  const positionRef = useRef({ x: 0, y: 0 });
+  const hasMovedRef = useRef(false);
+  const isMouseDownRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, y: 0 });
+  const dragStartPositionRef = useRef({ x: 0, y: 0 });
+  const lastTapRef = useRef(0);
+
+  // Sync refs with state
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+
+  useEffect(() => {
+    positionRef.current = position;
+  }, [position]);
+
+  const clampPosition = useCallback((x: number, y: number, currentScale: number) => {
+    if (!containerRef.current || currentScale <= 1) {
+      return { x: 0, y: 0 };
+    }
+    const rect = containerRef.current.getBoundingClientRect();
+    const maxX = ((currentScale - 1) * rect.width) / 2;
+    const maxY = ((currentScale - 1) * rect.height) / 2;
+    return {
+      x: Math.max(-maxX, Math.min(maxX, x)),
+      y: Math.max(-maxY, Math.min(maxY, y)),
+    };
+  }, []);
+
+  const zoomTo = useCallback(
+    (newScale: number, focusPoint?: { x: number; y: number }) => {
+      const clampedScale = Math.min(4, Math.max(1, newScale));
+      if (clampedScale <= 1) {
+        setScale(1);
+        setPosition({ x: 0, y: 0 });
+        return;
+      }
+
+      if (focusPoint && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const currentScale = scaleRef.current;
+        const currentPos = positionRef.current;
+
+        // Center offset from container center
+        const cx = focusPoint.x - rect.left - rect.width / 2;
+        const cy = focusPoint.y - rect.top - rect.height / 2;
+
+        const scaleRatio = clampedScale / currentScale;
+        const targetX = cx - (cx - currentPos.x) * scaleRatio;
+        const targetY = cy - (cy - currentPos.y) * scaleRatio;
+
+        const clampedPos = clampPosition(targetX, targetY, clampedScale);
+        setScale(clampedScale);
+        setPosition(clampedPos);
+      } else {
+        setScale(clampedScale);
+        setPosition((prev) => clampPosition(prev.x, prev.y, clampedScale));
+      }
+    },
+    [clampPosition]
+  );
+
+  const zoomIn = () => {
+    zoomTo(Math.round((scaleRef.current + 0.5) * 10) / 10);
+  };
+
+  const zoomOut = () => {
+    zoomTo(Math.round((scaleRef.current - 0.5) * 10) / 10);
+  };
+
+  const resetZoom = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  // Touch and Pinch Gesture Handling with passive: false for reliable mobile touch & pan
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let initialTouchDistance = 0;
+    let initialPinchScale = 1;
+    let initialPinchPosition = { x: 0, y: 0 };
+    let initialMidpoint = { x: 0, y: 0 };
+    let isPinching = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        // 2-Finger Pinch Gesture Started
+        e.preventDefault();
+        isPinching = true;
+        setIsGesturing(true);
+        hasMovedRef.current = true;
+
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        initialTouchDistance = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+        initialPinchScale = scaleRef.current;
+        initialPinchPosition = { ...positionRef.current };
+
+        const rect = container.getBoundingClientRect();
+        initialMidpoint = {
+          x: (t1.clientX + t2.clientX) / 2 - rect.left - rect.width / 2,
+          y: (t1.clientY + t2.clientY) / 2 - rect.top - rect.height / 2,
+        };
+      } else if (e.touches.length === 1) {
+        isPinching = false;
+        hasMovedRef.current = false;
+        const touch = e.touches[0];
+        dragStartRef.current = { x: touch.clientX, y: touch.clientY };
+        dragStartPositionRef.current = { ...positionRef.current };
+
+        // If already zoomed in, prevent vertical scrolling so user can pan the map freely
+        if (scaleRef.current > 1.05) {
+          e.preventDefault();
+          setIsGesturing(true);
+        }
+
+        // Detect double-tap to zoom
+        const now = Date.now();
+        if (now - lastTapRef.current < 280) {
+          e.preventDefault();
+          if (scaleRef.current > 1.1) {
+            resetZoom();
+          } else {
+            zoomTo(2.2, { x: touch.clientX, y: touch.clientY });
+          }
+          lastTapRef.current = 0;
+        } else {
+          lastTapRef.current = now;
+        }
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && isPinching && initialTouchDistance > 0) {
+        // Active Pinch to Zoom
+        e.preventDefault();
+        hasMovedRef.current = true;
+
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        const currentDistance = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+        const distanceRatio = currentDistance / initialTouchDistance;
+        const newScale = Math.min(4, Math.max(1, initialPinchScale * distanceRatio));
+
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          const maxX = ((newScale - 1) * rect.width) / 2;
+          const maxY = ((newScale - 1) * rect.height) / 2;
+
+          const ratio = newScale / initialPinchScale;
+          const newX = initialMidpoint.x - (initialMidpoint.x - initialPinchPosition.x) * ratio;
+          const newY = initialMidpoint.y - (initialMidpoint.y - initialPinchPosition.y) * ratio;
+
+          setScale(newScale);
+          setPosition({
+            x: Math.max(-maxX, Math.min(maxX, newX)),
+            y: Math.max(-maxY, Math.min(maxY, newY)),
+          });
+        }
+      } else if (e.touches.length === 1 && scaleRef.current > 1.05) {
+        // Active 1-finger Pan when zoomed in
+        e.preventDefault();
+        const touch = e.touches[0];
+        const dx = touch.clientX - dragStartRef.current.x;
+        const dy = touch.clientY - dragStartRef.current.y;
+
+        if (Math.hypot(dx, dy) > 4) {
+          hasMovedRef.current = true;
+        }
+
+        const rect = container.getBoundingClientRect();
+        const currentScale = scaleRef.current;
+        const maxX = ((currentScale - 1) * rect.width) / 2;
+        const maxY = ((currentScale - 1) * rect.height) / 2;
+
+        const nextX = dragStartPositionRef.current.x + dx;
+        const nextY = dragStartPositionRef.current.y + dy;
+
+        setPosition({
+          x: Math.max(-maxX, Math.min(maxX, nextX)),
+          y: Math.max(-maxY, Math.min(maxY, nextY)),
+        });
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length === 0) {
+        isPinching = false;
+        setIsGesturing(false);
+
+        // Snap to bounds if needed
+        if (scaleRef.current <= 1.05) {
+          setScale(1);
+          setPosition({ x: 0, y: 0 });
+        } else {
+          setPosition((prev) => clampPosition(prev.x, prev.y, scaleRef.current));
+        }
+      } else if (e.touches.length === 1) {
+        // Switched from 2 fingers to 1 finger
+        isPinching = false;
+        const touch = e.touches[0];
+        dragStartRef.current = { x: touch.clientX, y: touch.clientY };
+        dragStartPositionRef.current = { ...positionRef.current };
+      }
+    };
+
+    container.addEventListener('touchstart', onTouchStart, { passive: false });
+    container.addEventListener('touchmove', onTouchMove, { passive: false });
+    container.addEventListener('touchend', onTouchEnd, { passive: false });
+    container.addEventListener('touchcancel', onTouchEnd, { passive: false });
+
+    return () => {
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchmove', onTouchMove);
+      container.removeEventListener('touchend', onTouchEnd);
+      container.removeEventListener('touchcancel', onTouchEnd);
+    };
+  }, [clampPosition, zoomTo]);
+
+  // Desktop Mouse Drag Handling
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    isMouseDownRef.current = true;
+    hasMovedRef.current = false;
+    dragStartRef.current = { x: e.clientX, y: e.clientY };
+    dragStartPositionRef.current = { ...positionRef.current };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDownRef.current || scale <= 1.05) return;
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+
+    if (Math.hypot(dx, dy) > 4) {
+      hasMovedRef.current = true;
+      setIsDragging(true);
+      setIsGesturing(true);
+    }
+
+    setPosition(clampPosition(dragStartPositionRef.current.x + dx, dragStartPositionRef.current.y + dy, scale));
+  };
+
+  const handleMouseUp = () => {
+    isMouseDownRef.current = false;
+    setIsDragging(false);
+    setIsGesturing(false);
+  };
+
+  // Safe wrapper for clicking shop pin
+  const handleShopClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (hasMovedRef.current) {
+        e.stopPropagation();
+        return;
+      }
+      onShopClick();
+    },
+    [onShopClick]
+  );
+
   return (
-    <div className="relative bg-[#131313] w-full aspect-[800/855] overflow-hidden">
-      <svg
-        className="w-full h-full text-neutral-800 block"
-        viewBox="0 114.725 800 855"
-        preserveAspectRatio="xMidYMid meet"
-        fill="none"
+    <div
+      ref={containerRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      className="relative bg-[#131313] w-full aspect-[800/855] overflow-hidden select-none"
+      style={{
+        touchAction: scale > 1.05 ? 'none' : 'pan-y',
+        cursor: scale > 1.05 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+      }}
+    >
+      {/* Zoomable & Pannable SVG Canvas */}
+      <div
+        className="w-full h-full origin-center"
+        style={{
+          transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${scale})`,
+          transition: isGesturing ? 'none' : 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          willChange: 'transform',
+        }}
       >
+        <svg
+          className="w-full h-full text-neutral-800 block pointer-events-auto"
+          viewBox="0 114.725 800 855"
+          preserveAspectRatio="xMidYMid meet"
+          fill="none"
+        >
 
   
   <defs
@@ -673,7 +963,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
   </g>
   {/* OUR SHOP: 岡村理容美容館 */}
   <g
-     id="okamura-shop-card" className="cursor-pointer" onClick={onShopClick}>
+     id="okamura-shop-card" className="cursor-pointer" onClick={handleShopClick}>
     <rect
        x="208.83339"
        y="639.95667"
@@ -736,7 +1026,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      id="okamura-shop-card-7"
      transform="translate(55.116889,-76.726527)"
      className="cursor-pointer"
-     onClick={onShopClick}>
+     onClick={handleShopClick}>
     <rect
        x="259.76004"
        y="635.91931"
@@ -813,7 +1103,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
      id="map-header"
      transform="translate(-288.38362,-4.3594649)"
      className="cursor-pointer"
-     onClick={onShopClick}>
+     onClick={handleShopClick}>
     <rect
        x="329.97736"
        y="149.97736"
@@ -902,7 +1192,7 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
   </g>
   
   {/* Okamura Barbers Location Highlight Pin - Animated Retro Barber Pole on Map */}
-  <g id="okamura-barber-pole-pin" className="cursor-pointer" onClick={onShopClick}>
+  <g id="okamura-barber-pole-pin" className="cursor-pointer" onClick={handleShopClick}>
     {/* Ring aura pulse */}
     <circle cx={415} cy={675} r={22} fill="rgba(193,142,56,0.25)" className="animate-pulse" />
     <circle cx={415} cy={675} r={6} fill="#c18e38" />
@@ -1040,7 +1330,75 @@ export const AccessMap: React.FC<AccessMapProps> = ({ onShopClick }) => {
        style={{ fontStyle: "normal", fontVariant: "normal", fontWeight: "normal", fontStretch: "normal", fontSize: "13.3333px", fontFamily: "sans-serif", fontVariantLigatures: "normal", fontVariantCaps: "normal", fontVariantNumeric: "normal", fontVariantEastAsian: "normal" }}>• 東九州自動車道 豊前ICから車で8分</text>
   </g>
 
-      </svg>
+        </svg>
+      </div>
+
+      {/* Floating Zoom & Pan Controls */}
+      <div className="absolute top-3 right-3 z-30 flex flex-col items-center gap-1.5 bg-neutral-950/85 backdrop-blur-md p-1.5 rounded-xl border border-neutral-800/90 shadow-2xl pointer-events-auto">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            zoomIn();
+          }}
+          disabled={scale >= 4}
+          className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer"
+          aria-label="拡大"
+          title="拡大 (Zoom in)"
+        >
+          <ZoomIn className="w-4 h-4" />
+        </button>
+
+        <span className="text-[10px] font-mono font-bold text-gold-400 py-0.5 select-none px-1">
+          {Math.round(scale * 100)}%
+        </span>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            zoomOut();
+          }}
+          disabled={scale <= 1}
+          className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer"
+          aria-label="縮小"
+          title="縮小 (Zoom out)"
+        >
+          <ZoomOut className="w-4 h-4" />
+        </button>
+
+        {scale > 1.05 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              resetZoom();
+            }}
+            className="w-8 h-8 flex items-center justify-center rounded-lg text-neutral-300 hover:text-gold-300 hover:bg-neutral-800 active:scale-95 transition-all cursor-pointer border-t border-neutral-800/80 mt-0.5"
+            aria-label="全体表示に戻す"
+            title="全体表示に戻す (Reset zoom)"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+          </button>
+        )}
+      </div>
+
+      {/* Floating Guidance Badge */}
+      <div className="absolute bottom-3 left-3 z-30 pointer-events-none">
+        <div className="bg-neutral-950/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-neutral-800/90 text-[10px] text-neutral-300 flex items-center gap-1.5 shadow-lg">
+          {scale > 1.05 ? (
+            <>
+              <Move className="w-3 h-3 text-gold-400 shrink-0" />
+              <span>ドラッグで移動 / 2度押しでリセット</span>
+            </>
+          ) : (
+            <>
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse shrink-0" />
+              <span>2本指ピンチまたはダブルタップで拡大</span>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
